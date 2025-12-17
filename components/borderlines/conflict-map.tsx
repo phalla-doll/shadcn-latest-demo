@@ -192,12 +192,6 @@ export function ConflictMap() {
                                 border ({EVENTS.length} events documented)
                             </CardDescription>
                         </div>
-                        <Badge
-                            variant="outline"
-                            className="border-red-300 dark:border-red-700/50 text-red-600 dark:text-red-300"
-                        >
-                            {activeZones} Active Zones
-                        </Badge>
                     </div>
                 </CardHeader>
                 <CardContent>
