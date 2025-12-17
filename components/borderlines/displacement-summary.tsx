@@ -1,26 +1,26 @@
 "use client"
 
 import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-    CardDescription,
-} from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Badge } from "@/components/ui/badge"
-import { EVENTS } from "@/constants"
-import { useMemo } from "react"
-import {
-    School01Icon,
-    TeacherIcon,
-    StudentIcon,
-    UserGroupIcon,
     AlertDiamondIcon,
     HeartbreakIcon,
+    School01Icon,
+    StudentIcon,
+    TeacherIcon,
+    UserGroupIcon,
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
+import { useMemo } from "react"
+import { Badge } from "@/components/ui/badge"
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import { EVENTS } from "@/constants"
 
 interface StatCardProps {
     label: string
@@ -43,16 +43,16 @@ function StatCard({ label, value, icon, variant = "default" }: StatCardProps) {
     }
 
     return (
-        <div
-            className={`rounded-lg border p-4 ${variantStyles[variant]}`}
-        >
+        <div className={`rounded-lg border p-4 ${variantStyles[variant]}`}>
             <div className="flex items-start justify-between">
                 <div>
                     <p className="text-zinc-400 text-xs uppercase tracking-wider mb-1">
                         {label}
                     </p>
                     <p className="text-2xl font-bold text-white tabular-nums">
-                        {typeof value === "number" ? value.toLocaleString() : value}
+                        {typeof value === "number"
+                            ? value.toLocaleString()
+                            : value}
                     </p>
                 </div>
                 <div className={iconStyles[variant]}>{icon}</div>
@@ -70,7 +70,12 @@ interface ProvinceData {
 }
 
 const provinces = [
-    { province: "Banteay Meanchey", families: 53055, people: 178302, deaths: 6 },
+    {
+        province: "Banteay Meanchey",
+        families: 53055,
+        people: 178302,
+        deaths: 6,
+    },
     { province: "Battambang", families: 12322, people: 44246, deaths: 0 },
     { province: "Koh Kong", families: 1962, people: 7020, deaths: 0 },
     { province: "Oddar Meanchey", families: 12249, people: 41486, deaths: 4 },
@@ -90,7 +95,7 @@ const reportedTotals = provinces.reduce(
         people: acc.people + prov.people,
         deaths: acc.deaths + prov.deaths,
     }),
-    { families: 0, people: 0, deaths: 0 }
+    { families: 0, people: 0, deaths: 0 },
 )
 
 const sortedProvinces = [...provinces].sort((a, b) => b.people - a.people)
@@ -109,28 +114,43 @@ const provinceData: ProvinceData[] = [
 export function DisplacementSummary() {
     // Calculate stats from real events
     const stats = useMemo(() => {
-        const militaryEvents = EVENTS.filter(e => e.category === "Military").length
-        const civilianEvents = EVENTS.filter(e => e.category === "Civilian").length
-        
+        const militaryEvents = EVENTS.filter(
+            (e) => e.category === "Military",
+        ).length
+        const civilianEvents = EVENTS.filter(
+            (e) => e.category === "Civilian",
+        ).length
+
         // Get unique locations
-        const locations = new Set(EVENTS.map(e => e.location.split(",")[0].trim()))
-        
+        const locations = new Set(
+            EVENTS.map((e) => e.location.split(",")[0].trim()),
+        )
+
         // Get date range
-        const dates = EVENTS.map(e => new Date(e.date)).sort((a, b) => a.getTime() - b.getTime())
+        const dates = EVENTS.map((e) => new Date(e.date)).sort(
+            (a, b) => a.getTime() - b.getTime(),
+        )
         const firstDate = dates[0]
         const lastDate = dates[dates.length - 1]
-        const daySpan = Math.ceil((lastDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)) + 1
-        
+        const daySpan =
+            Math.ceil(
+                (lastDate.getTime() - firstDate.getTime()) /
+                    (1000 * 60 * 60 * 24),
+            ) + 1
+
         return {
             totalEvents: EVENTS.length,
             militaryEvents,
             civilianEvents,
             locations: locations.size,
-            daySpan
+            daySpan,
         }
     }, [])
 
-    const totalFamilies = provinceData.reduce((acc, p) => acc + (p.families || 0), 0)
+    const totalFamilies = provinceData.reduce(
+        (acc, p) => acc + (p.families || 0),
+        0,
+    )
 
     return (
         <Card className="bg-zinc-900/50 border-zinc-800">
@@ -158,8 +178,12 @@ export function DisplacementSummary() {
                             As of December 17, 2025, 12:30
                         </CardDescription>
                     </div>
-                    <Badge variant="outline" className="border-zinc-700 text-zinc-300">
-                        {stats.totalEvents} documented events over {stats.daySpan} days
+                    <Badge
+                        variant="outline"
+                        className="border-zinc-700 text-zinc-300"
+                    >
+                        {stats.totalEvents} documented events over{" "}
+                        {stats.daySpan} days
                     </Badge>
                 </div>
             </CardHeader>
@@ -219,7 +243,10 @@ export function DisplacementSummary() {
                         <span className="w-1 h-4 bg-blue-500 rounded-full" />
                         Education Impact
                     </h4>
-                    <p className="text-zinc-400 text-sm mb-4">Schools along the border across 6 provinces have been temporarily closed due to the conflict.</p>
+                    <p className="text-zinc-400 text-sm mb-4">
+                        Schools along the border across 6 provinces have been
+                        temporarily closed due to the conflict.
+                    </p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <StatCard
                             label="Schools Closed"
@@ -301,14 +328,20 @@ export function DisplacementSummary() {
                                     <tr
                                         key={province.province}
                                         className={`border-t border-zinc-800 ${
-                                            index % 2 === 0 ? "bg-zinc-900/30" : ""
+                                            index % 2 === 0
+                                                ? "bg-zinc-900/30"
+                                                : ""
                                         } hover:bg-zinc-800/30 transition-colors`}
                                     >
-                                        <td className={`py-3 px-4 font-medium ${province.pending ? "text-zinc-500 italic" : "text-white"}`}>
+                                        <td
+                                            className={`py-3 px-4 font-medium ${province.pending ? "text-zinc-500 italic" : "text-white"}`}
+                                        >
                                             {province.province}
                                         </td>
                                         <td className="py-3 px-4 text-right text-zinc-300 tabular-nums">
-                                            {province.families !== null ? province.families.toLocaleString() : "—"}
+                                            {province.families !== null
+                                                ? province.families.toLocaleString()
+                                                : "—"}
                                         </td>
                                         <td className="py-3 px-4 text-right text-zinc-300 tabular-nums">
                                             {province.people.toLocaleString()}
@@ -323,7 +356,9 @@ export function DisplacementSummary() {
                             </tbody>
                             <tfoot>
                                 <tr className="border-t-2 border-zinc-700 bg-zinc-800/50 font-medium">
-                                    <td className="py-3 px-4 text-white">Total</td>
+                                    <td className="py-3 px-4 text-white">
+                                        Total
+                                    </td>
                                     <td className="py-3 px-4 text-right text-white tabular-nums">
                                         {totalFamilies.toLocaleString()}
                                     </td>

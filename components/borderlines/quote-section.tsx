@@ -41,10 +41,20 @@ export function QuoteSection() {
 
                 <blockquote className="max-w-3xl mx-auto">
                     <p className="text-xl md:text-2xl lg:text-3xl font-medium text-white leading-relaxed">
-                        United for Cambodia. Standing together in times of crisis, 
-                        <span className="text-red-400"> documenting truth</span>, 
-                        <span className="text-amber-400"> supporting our people</span>, and 
-                        <span className="text-blue-400"> preserving our heritage</span>.
+                        United for Cambodia. Standing together in times of
+                        crisis,
+                        <span className="text-red-400"> documenting truth</span>
+                        ,
+                        <span className="text-amber-400">
+                            {" "}
+                            supporting our people
+                        </span>
+                        , and
+                        <span className="text-blue-400">
+                            {" "}
+                            preserving our heritage
+                        </span>
+                        .
                     </p>
                 </blockquote>
 
@@ -106,4 +116,3 @@ export function QuoteSection() {
         </section>
     )
 }
-

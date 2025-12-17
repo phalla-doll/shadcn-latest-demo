@@ -1,14 +1,16 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 interface ScrollDateBadgeProps {
     currentDate?: string
 }
 
-export function ScrollDateBadge({ currentDate = "December 17, 2024" }: ScrollDateBadgeProps) {
+export function ScrollDateBadge({
+    currentDate = "December 17, 2024",
+}: ScrollDateBadgeProps) {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
@@ -83,4 +85,3 @@ export function FloatingMobileButton({ onClick }: FloatingMobileButtonProps) {
         </div>
     )
 }
-

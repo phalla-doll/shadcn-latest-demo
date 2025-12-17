@@ -1,22 +1,27 @@
 "use client"
 
+import { useMemo } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { LiveStatusBadge } from "./live-status-badge"
 import { EVENTS } from "@/constants"
-import { useMemo } from "react"
+import { LiveStatusBadge } from "./live-status-badge"
 
 export function StickyHeader() {
     // Calculate date range from events
     const dateRange = useMemo(() => {
-        const dates = EVENTS.map(e => new Date(e.date)).sort((a, b) => a.getTime() - b.getTime())
+        const dates = EVENTS.map((e) => new Date(e.date)).sort(
+            (a, b) => a.getTime() - b.getTime(),
+        )
         const firstDate = dates[0]
         const lastDate = dates[dates.length - 1]
-        
+
         const formatDate = (date: Date) => {
-            return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+            return date.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+            })
         }
-        
+
         return `${formatDate(firstDate)} - ${formatDate(lastDate)}`
     }, [])
 
@@ -75,7 +80,8 @@ export function StickyHeader() {
                         Documenting the Border Crisis
                     </h1>
                     <p className="text-zinc-400 text-sm mt-1">
-                        Real-time monitoring and documentation of the Cambodia-Thailand border situation
+                        Real-time monitoring and documentation of the
+                        Cambodia-Thailand border situation
                     </p>
                 </div>
             </div>

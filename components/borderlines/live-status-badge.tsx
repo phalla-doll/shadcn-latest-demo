@@ -17,7 +17,7 @@ export function LiveStatusBadge({
             variant="destructive"
             className={cn(
                 "gap-2 bg-red-950 text-red-200 border-red-800/50",
-                className
+                className,
             )}
         >
             <span className="relative flex h-2 w-2">
@@ -28,4 +28,3 @@ export function LiveStatusBadge({
         </Badge>
     )
 }
-

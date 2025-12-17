@@ -16,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: "Borderlines - Cambodia-Thailand Active Conflict Monitor",
-    description: "Real-time monitoring and documentation of the Cambodia-Thailand border crisis. Tracking displacement, humanitarian impact, and events along the disputed border.",
+    description:
+        "Real-time monitoring and documentation of the Cambodia-Thailand border crisis. Tracking displacement, humanitarian impact, and events along the disputed border.",
 }
 
 export default function RootLayout({

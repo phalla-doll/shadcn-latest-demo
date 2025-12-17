@@ -2,15 +2,15 @@
 
 import { useState } from "react"
 import {
-    StickyHeader,
     ConflictMap,
     DisplacementSummary,
-    QuoteSection,
     FilterBar,
-    Timeline,
-    SiteFooter,
-    ScrollDateBadge,
     FloatingMobileButton,
+    QuoteSection,
+    ScrollDateBadge,
+    SiteFooter,
+    StickyHeader,
+    Timeline,
 } from "@/components/borderlines"
 
 export default function Page() {
@@ -41,7 +41,7 @@ export default function Page() {
 
                     {/* d) Filter Bar */}
                     <section>
-                        <FilterBar 
+                        <FilterBar
                             locationFilter={locationFilter}
                             onLocationChange={setLocationFilter}
                         />

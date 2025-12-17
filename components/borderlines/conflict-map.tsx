@@ -1,21 +1,24 @@
 "use client"
 
+import { useMemo } from "react"
+import { Badge } from "@/components/ui/badge"
 import {
     Card,
     CardContent,
+    CardDescription,
     CardHeader,
     CardTitle,
-    CardDescription,
 } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { EVENTS } from "@/constants"
-import { useMemo } from "react"
 
 export function ConflictMap() {
     // Get unique locations with coordinates from events
     const locations = useMemo(() => {
-        const locationMap = new Map<string, { lat: number; lng: number; count: number; name: string }>()
-        
+        const locationMap = new Map<
+            string,
+            { lat: number; lng: number; count: number; name: string }
+        >()
+
         for (const event of EVENTS) {
             if (event.coordinates) {
                 const key = `${event.coordinates.lat.toFixed(2)},${event.coordinates.lng.toFixed(2)}`
@@ -27,28 +30,33 @@ export function ConflictMap() {
                         lat: event.coordinates.lat,
                         lng: event.coordinates.lng,
                         count: 1,
-                        name: event.location.split(",")[0].trim()
+                        name: event.location.split(",")[0].trim(),
                     })
                 }
             }
         }
-        
+
         return Array.from(locationMap.values())
     }, [])
 
     // Calculate marker positions relative to map bounds
     // Border region roughly: lat 11.5-14.5, lng 102.3-105.5
     const getPosition = (lat: number, lng: number) => {
-        const minLat = 11.5, maxLat = 14.5
-        const minLng = 102.3, maxLng = 105.5
-        
+        const minLat = 11.5,
+            maxLat = 14.5
+        const minLng = 102.3,
+            maxLng = 105.5
+
         const top = ((maxLat - lat) / (maxLat - minLat)) * 100
         const left = ((lng - minLng) / (maxLng - minLng)) * 100
-        
-        return { top: `${Math.max(5, Math.min(90, top))}%`, left: `${Math.max(5, Math.min(90, left))}%` }
+
+        return {
+            top: `${Math.max(5, Math.min(90, top))}%`,
+            left: `${Math.max(5, Math.min(90, left))}%`,
+        }
     }
 
-    const activeZones = locations.filter(l => l.count >= 5).length
+    const activeZones = locations.filter((l) => l.count >= 5).length
 
     return (
         <Card className="bg-zinc-900/50 border-zinc-800">
@@ -72,10 +80,14 @@ export function ConflictMap() {
                             Conflict Map – Key Areas
                         </CardTitle>
                         <CardDescription className="text-zinc-400">
-                            Interactive map showing conflict zones along the border ({EVENTS.length} events documented)
+                            Interactive map showing conflict zones along the
+                            border ({EVENTS.length} events documented)
                         </CardDescription>
                     </div>
-                    <Badge variant="outline" className="border-red-700/50 text-red-300">
+                    <Badge
+                        variant="outline"
+                        className="border-red-700/50 text-red-300"
+                    >
                         {activeZones} Active Zones
                     </Badge>
                 </div>
@@ -85,7 +97,7 @@ export function ConflictMap() {
                 <div className="relative w-full h-80 rounded-lg overflow-hidden bg-zinc-800 border border-zinc-700">
                     {/* Map Background with gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-zinc-800 to-amber-900/20" />
-                    
+
                     {/* Grid lines for map effect */}
                     <div
                         className="absolute inset-0 opacity-20"
@@ -102,9 +114,12 @@ export function ConflictMap() {
                     <div className="absolute inset-0 p-4">
                         <div className="relative w-full h-full">
                             {locations.slice(0, 15).map((location, idx) => {
-                                const pos = getPosition(location.lat, location.lng)
+                                const pos = getPosition(
+                                    location.lat,
+                                    location.lng,
+                                )
                                 const isActive = location.count >= 5
-                                
+
                                 return (
                                     <button
                                         key={idx}
@@ -112,14 +127,19 @@ export function ConflictMap() {
                                         className="absolute group cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
                                         style={{ top: pos.top, left: pos.left }}
                                     >
-                                        <span className={`relative flex ${isActive ? 'h-4 w-4' : 'h-3 w-3'}`}>
+                                        <span
+                                            className={`relative flex ${isActive ? "h-4 w-4" : "h-3 w-3"}`}
+                                        >
                                             {isActive && (
                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                                             )}
-                                            <span className={`relative inline-flex rounded-full ${isActive ? 'h-4 w-4 bg-red-500 border-2 border-red-300' : 'h-3 w-3 bg-amber-500 border border-amber-300'}`} />
+                                            <span
+                                                className={`relative inline-flex rounded-full ${isActive ? "h-4 w-4 bg-red-500 border-2 border-red-300" : "h-3 w-3 bg-amber-500 border border-amber-300"}`}
+                                            />
                                         </span>
                                         <span className="absolute left-6 top-0 hidden group-hover:block bg-zinc-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10 border border-zinc-700">
-                                            {location.name} ({location.count} events)
+                                            {location.name} ({location.count}{" "}
+                                            events)
                                         </span>
                                     </button>
                                 )
@@ -156,7 +176,9 @@ export function ConflictMap() {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500" />
                         </span>
-                        <span className="text-zinc-400">Active Conflict Zone (5+ events)</span>
+                        <span className="text-zinc-400">
+                            Active Conflict Zone (5+ events)
+                        </span>
                     </div>
                     <div className="flex items-center gap-2">
                         <span className="relative flex h-3 w-3">

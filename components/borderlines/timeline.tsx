@@ -1,27 +1,35 @@
 "use client"
 
+import { useMemo, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import {
     Card,
     CardContent,
+    CardDescription,
     CardHeader,
     CardTitle,
-    CardDescription,
 } from "@/components/ui/card"
 import { EVENTS } from "@/constants"
 import type { ConflictEvent, EventCategory } from "@/types"
-import { useMemo, useState } from "react"
 
-const categoryConfig: Record<EventCategory, {
-    color: string
-    badge: "destructive" | "secondary" | "default" | "outline"
-    icon: React.ReactNode
-}> = {
+const categoryConfig: Record<
+    EventCategory,
+    {
+        color: string
+        badge: "destructive" | "secondary" | "default" | "outline"
+        icon: React.ReactNode
+    }
+> = {
     Military: {
         color: "bg-red-500",
         badge: "destructive",
         icon: (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
                 <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -35,7 +43,12 @@ const categoryConfig: Record<EventCategory, {
         color: "bg-amber-500",
         badge: "secondary",
         icon: (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
                 <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -49,7 +62,12 @@ const categoryConfig: Record<EventCategory, {
         color: "bg-blue-500",
         badge: "outline",
         icon: (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
                 <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -63,7 +81,12 @@ const categoryConfig: Record<EventCategory, {
         color: "bg-purple-500",
         badge: "default",
         icon: (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
                 <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -77,7 +100,12 @@ const categoryConfig: Record<EventCategory, {
         color: "bg-emerald-500",
         badge: "default",
         icon: (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
                 <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -122,12 +150,13 @@ function EventCard({ event }: { event: ConflictEvent }) {
                                 {event.title}
                             </CardTitle>
                             <CardDescription className="text-zinc-500 text-sm">
-                                {time && `${time} • `}{event.location}
+                                {time && `${time} • `}
+                                {event.location}
                             </CardDescription>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
-                        {event.sources.some(s => s.url) && (
+                        {event.sources.some((s) => s.url) && (
                             <Badge
                                 variant="outline"
                                 className="border-emerald-700/50 text-emerald-400 text-xs"
@@ -203,12 +232,14 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
     // Sort events by date (newest first) and filter
     const filteredEvents = useMemo(() => {
         let events = [...EVENTS].sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
         )
 
         if (locationFilter && locationFilter !== "all") {
             events = events.filter((event) =>
-                event.location.toLowerCase().includes(locationFilter.toLowerCase())
+                event.location
+                    .toLowerCase()
+                    .includes(locationFilter.toLowerCase()),
             )
         }
 
@@ -234,7 +265,7 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
                 acc[dateKey].push(event)
                 return acc
             },
-            {} as Record<string, ConflictEvent[]>
+            {} as Record<string, ConflictEvent[]>,
         )
     }, [displayEvents])
 
@@ -255,8 +286,13 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         />
                     </svg>
-                    <h3 className="text-lg font-medium text-white">Event Timeline</h3>
-                    <Badge variant="secondary" className="bg-zinc-800 text-zinc-300">
+                    <h3 className="text-lg font-medium text-white">
+                        Event Timeline
+                    </h3>
+                    <Badge
+                        variant="secondary"
+                        className="bg-zinc-800 text-zinc-300"
+                    >
                         {filteredEvents.length} events
                     </Badge>
                 </div>

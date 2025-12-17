@@ -1,7 +1,8 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { useMemo } from "react"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
     Select,
     SelectContent,
@@ -10,7 +11,6 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { EVENTS } from "@/constants"
-import { useMemo } from "react"
 
 interface FilterBarProps {
     locationFilter: string
@@ -18,14 +18,22 @@ interface FilterBarProps {
     onSubmitEvent?: () => void
 }
 
-export function FilterBar({ locationFilter, onLocationChange, onSubmitEvent }: FilterBarProps) {
+export function FilterBar({
+    locationFilter,
+    onLocationChange,
+    onSubmitEvent,
+}: FilterBarProps) {
     // Get unique locations from events
     const locations = useMemo(() => {
         const locationSet = new Set<string>()
         for (const event of EVENTS) {
             // Extract the main location (before comma)
             const mainLocation = event.location.split(",")[0].trim()
-            if (mainLocation && mainLocation !== "Multiple Locations" && mainLocation !== "Border Line") {
+            if (
+                mainLocation &&
+                mainLocation !== "Multiple Locations" &&
+                mainLocation !== "Border Line"
+            ) {
                 locationSet.add(mainLocation)
             }
         }
@@ -35,8 +43,8 @@ export function FilterBar({ locationFilter, onLocationChange, onSubmitEvent }: F
     // Count events based on filter
     const filteredCount = useMemo(() => {
         if (locationFilter === "all") return EVENTS.length
-        return EVENTS.filter(e => 
-            e.location.toLowerCase().includes(locationFilter.toLowerCase())
+        return EVENTS.filter((e) =>
+            e.location.toLowerCase().includes(locationFilter.toLowerCase()),
         ).length
     }, [locationFilter])
 
@@ -51,7 +59,10 @@ export function FilterBar({ locationFilter, onLocationChange, onSubmitEvent }: F
                     <SelectContent className="bg-zinc-800 border-zinc-700 max-h-64">
                         <SelectItem value="all">All Locations</SelectItem>
                         {locations.map((location) => (
-                            <SelectItem key={location} value={location.toLowerCase()}>
+                            <SelectItem
+                                key={location}
+                                value={location.toLowerCase()}
+                            >
                                 {location}
                             </SelectItem>
                         ))}

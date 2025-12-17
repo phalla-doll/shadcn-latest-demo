@@ -3,23 +3,23 @@ export type EventCategory =
     | "Diplomatic"
     | "Political"
     | "Legal"
-    | "Civilian";
+    | "Civilian"
 
 export interface ConflictEvent {
-    id: string;
-    title: string;
-    date: string; // ISO String for sorting
-    displayDate: string; // Human readable
-    year: number;
-    location: string;
-    description: string;
-    category: EventCategory;
+    id: string
+    title: string
+    date: string // ISO String for sorting
+    displayDate: string // Human readable
+    year: number
+    location: string
+    description: string
+    category: EventCategory
     sources: {
-        title: string;
-        url?: string;
-    }[];
+        title: string
+        url?: string
+    }[]
     coordinates?: {
-        lat: number;
-        lng: number;
-    };
+        lat: number
+        lng: number
+    }
 }
