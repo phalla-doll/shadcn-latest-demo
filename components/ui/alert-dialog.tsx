@@ -29,15 +29,20 @@ function AlertDialogPortal({ ...props }: AlertDialogPrimitive.Portal.Props) {
 
 function AlertDialogOverlay({
     className,
+    onClick,
     ...props
-}: AlertDialogPrimitive.Backdrop.Props) {
+}: AlertDialogPrimitive.Backdrop.Props & {
+    onClick?: () => void
+}) {
     return (
         <AlertDialogPrimitive.Backdrop
             data-slot="alert-dialog-overlay"
             className={cn(
                 "data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs fixed inset-0 isolate z-50",
+                onClick && "cursor-pointer",
                 className,
             )}
+            onClick={onClick}
             {...props}
         />
     )
@@ -46,13 +51,15 @@ function AlertDialogOverlay({
 function AlertDialogContent({
     className,
     size = "default",
+    onBackdropClick,
     ...props
 }: AlertDialogPrimitive.Popup.Props & {
     size?: "default" | "sm"
+    onBackdropClick?: () => void
 }) {
     return (
         <AlertDialogPortal>
-            <AlertDialogOverlay />
+            <AlertDialogOverlay onClick={onBackdropClick} />
             <AlertDialogPrimitive.Popup
                 data-slot="alert-dialog-content"
                 data-size={size}

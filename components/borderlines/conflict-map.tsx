@@ -1,6 +1,6 @@
 "use client"
 
-import { Location01Icon, MapsIcon } from "@hugeicons/core-free-icons"
+import { Cancel01Icon, Location01Icon, MapsIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import type { Map as LeafletMap, Marker } from "leaflet"
 import { useEffect, useMemo, useRef, useState } from "react"
@@ -31,9 +31,17 @@ function EventModal({
 }) {
     return (
         <AlertDialog open={!!event} onOpenChange={(open) => !open && onClose()}>
-            <AlertDialogContent className="max-w-2xl">
+            <AlertDialogContent className="max-w-2xl" onBackdropClick={onClose}>
+                <button
+                    type="button"
+                    onClick={onClose}
+                    className="absolute top-4 right-4 p-1 rounded-md text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                    aria-label="Close dialog"
+                >
+                    <HugeiconsIcon icon={Cancel01Icon} className="w-5 h-5" />
+                </button>
                 <AlertDialogHeader>
-                    <AlertDialogTitle className="text-xl">
+                    <AlertDialogTitle className="text-xl pr-8">
                         {event.title}
                     </AlertDialogTitle>
                     <AlertDialogDescription className="space-y-2">
