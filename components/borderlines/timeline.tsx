@@ -95,38 +95,14 @@ function EventCard({ event }: { event: ConflictEvent }) {
                             </CardDescription>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                        {event.sources.some((s) => s.url) && (
-                            <Badge
-                                variant="outline"
-                                className="border-emerald-300 dark:border-emerald-700/50 text-emerald-600 dark:text-emerald-400 text-xs"
-                            >
-                                <HugeiconsIcon
-                                    icon={Tick02Icon}
-                                    className="w-3 h-3 mr-1"
-                                    strokeWidth={2.5}
-                                />
-                                Verified
-                            </Badge>
-                        )}
+                    {time && (
                         <Badge
-                            variant={config.badge}
-                            className={
-                                event.category === "Military"
-                                    ? "bg-red-950 text-red-300 border-red-800/50"
-                                    : event.category === "Civilian"
-                                      ? "bg-amber-950 text-amber-300 border-amber-800/50"
-                                      : event.category === "Diplomatic"
-                                        ? "border-blue-700/50 text-blue-300"
-                                        : event.category === "Political"
-                                          ? "bg-purple-950 text-purple-300 border-purple-800/50"
-                                          : "bg-emerald-950 text-emerald-300 border-emerald-800/50"
-                            }
+                            variant="outline"
+                            className="border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 text-xs font-medium"
                         >
-                            {config.icon}
-                            <span className="ml-1">{event.category}</span>
+                            {time}
                         </Badge>
-                    </div>
+                    )}
                 </div>
             </CardHeader>
             <CardContent className="pl-10">
