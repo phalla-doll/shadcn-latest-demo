@@ -65,7 +65,7 @@ const chartData = provinceData
     .filter((p) => !p.pending)
     .map((p) => ({
         name:
-            p.province.length > 12 ? p.province.slice(0, 12) + "…" : p.province,
+            p.province.length > 12 ? `${p.province.slice(0, 12)}…` : p.province,
         fullName: p.province,
         families: p.families || 0,
         people: p.people,
