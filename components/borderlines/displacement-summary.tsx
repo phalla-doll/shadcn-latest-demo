@@ -1,7 +1,7 @@
 "use client"
 
 import {
-    AlertDiamondIcon,
+    FirstAidKitIcon,
     HeartbreakIcon,
     School01Icon,
     StudentIcon,
@@ -129,7 +129,7 @@ export function DisplacementSummary() {
                             variant="warning"
                             icon={
                                 <HugeiconsIcon
-                                    icon={AlertDiamondIcon}
+                                    icon={FirstAidKitIcon}
                                     className="size-6"
                                     strokeWidth={2}
                                 />
