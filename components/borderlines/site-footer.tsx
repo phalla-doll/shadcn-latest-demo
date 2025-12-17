@@ -3,13 +3,22 @@
 import {
     Facebook01Icon,
     LegalDocument01Icon,
+    Moon02Icon,
     NewTwitterIcon,
+    Sun03Icon,
     TelegramIcon,
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useTheme } from "next-themes"
 import { Separator } from "@/components/ui/separator"
 
 export function SiteFooter() {
+    const { theme, setTheme } = useTheme()
+
+    const toggleTheme = () => {
+        setTheme(theme === "dark" ? "light" : "dark")
+    }
+
     return (
         <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
             <div className="max-w-6xl mx-auto px-4 py-8">
@@ -62,6 +71,18 @@ export function SiteFooter() {
                             >
                                 <HugeiconsIcon
                                     icon={Facebook01Icon}
+                                    className="w-5 h-5"
+                                />
+                            </button>
+                            <div className="w-px h-4 bg-zinc-300 dark:bg-zinc-700" />
+                            <button
+                                type="button"
+                                onClick={toggleTheme}
+                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                                aria-label="Toggle theme"
+                            >
+                                <HugeiconsIcon
+                                    icon={theme === "dark" ? Sun03Icon : Moon02Icon}
                                     className="w-5 h-5"
                                 />
                             </button>
