@@ -170,13 +170,10 @@ export function DisplacementSummary() {
                             As of December 17, 2025, 12:30
                         </CardDescription>
                     </div>
-                    <Badge
-                        variant="outline"
-                        className="border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300"
-                    >
-                        {stats.totalEvents} documented events over{" "}
-                        {stats.daySpan} days
-                    </Badge>
+                    <div className="text-right">
+                        <p className="text-xs text-zinc-500 dark:text-zinc-400">Regions Affected</p>
+                        <p className="text-sm font-medium text-zinc-900 dark:text-white">Military Regions 4 & 5</p>
+                    </div>
                 </div>
             </CardHeader>
 
