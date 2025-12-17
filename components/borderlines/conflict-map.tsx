@@ -254,7 +254,7 @@ export function ConflictMap() {
 
     return (
         <>
-            <Card className="bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800">
+            <Card className="relative z-0 bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800">
                 <CardHeader>
                     <div className="flex items-center justify-between">
                         <div>
