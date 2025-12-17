@@ -111,7 +111,6 @@ const provinceData: ProvinceData[] = [
 ]
 
 export function DisplacementSummary() {
-
     const totalFamilies = provinceData.reduce(
         (acc, p) => acc + (p.families || 0),
         0,
