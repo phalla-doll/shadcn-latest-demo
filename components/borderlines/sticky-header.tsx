@@ -2,10 +2,12 @@
 
 import { Location01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import Link from "next/link"
 import { useMemo } from "react"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { EVENTS } from "@/constants"
+import { cn } from "@/lib/utils"
 import { LiveStatusBadge } from "./live-status-badge"
 
 export function StickyHeader() {
@@ -56,16 +58,21 @@ export function StickyHeader() {
                 </div>
 
                 {/* Desktop CTA - Vertically centered */}
-                <Button
-                    variant="outline"
-                    className="hidden md:flex items-center border-blue-300 dark:border-blue-700/50 text-blue-700 dark:text-blue-200 bg-blue-50 dark:bg-blue-950/30 hover:bg-blue-100 dark:hover:bg-blue-900/40"
+                <Link
+                    href="https://cambodia-donation-map.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                        buttonVariants({ variant: "outline" }),
+                        "hidden md:flex items-center border-blue-300 dark:border-blue-700/50 text-blue-700 dark:text-blue-200 bg-blue-50 dark:bg-blue-950/30 hover:bg-blue-100 dark:hover:bg-blue-900/40"
+                    )}
                 >
                     <HugeiconsIcon
                         icon={Location01Icon}
-                        className="w-4 h-4 mr-2"
+                        className="size-4"
                     />
                     Phnom Penh Donation Map
-                </Button>
+                </Link>
             </div>
         </header>
     )
