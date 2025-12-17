@@ -11,7 +11,6 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
 import { useMemo } from "react"
-import { Badge } from "@/components/ui/badge"
 import {
     Card,
     CardContent,
