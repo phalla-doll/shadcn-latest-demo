@@ -18,6 +18,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { ProvinceBarChart } from "./province-bar-chart"
 
 interface StatCardProps {
     label: string
@@ -298,12 +299,12 @@ export function DisplacementSummary() {
                                                 ? province.families.toLocaleString()
                                                 : "—"}
                                         </td>
-                                        <td className="py-3 px-4 text-right text-zinc-300 tabular-nums">
+                                        <td className="py-3 px-4 text-right text-zinc-600 dark:text-zinc-300 tabular-nums">
                                             {province.people.toLocaleString()}
                                         </td>
                                         <td className="py-3 px-4 text-right">
-                                            <span className="text-red-400 tabular-nums">
-                                                {province.deaths}
+                                            <span className={`tabular-nums ${province.deaths ? "text-red-500 dark:text-red-300" : "text-zinc-600 dark:text-zinc-300"}`}>
+                                                {province.deaths.toLocaleString()}
                                             </span>
                                         </td>
                                     </tr>
@@ -328,6 +329,7 @@ export function DisplacementSummary() {
                         </table>
                     </div>
                 </div>
+                {/* <ProvinceBarChart /> */}
             </CardContent>
         </Card>
     )
