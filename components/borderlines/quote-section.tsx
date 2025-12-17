@@ -9,7 +9,7 @@ export function QuoteSection() {
         <section className="relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
             {/* Flag Background Image */}
             <div
-                className="absolute inset-0 opacity-[0.12] bg-contain bg-center bg-no-repeat"
+                className="absolute inset-0 opacity-[0.12] my-2 bg-contain bg-center bg-no-repeat"
                 style={{ backgroundImage: "url('/flag_map.png')" }}
                 aria-hidden="true"
             />

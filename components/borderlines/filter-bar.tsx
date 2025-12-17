@@ -94,6 +94,7 @@ export function FilterBar({
 
             {/* Submit Event Button */}
             <Button
+                disabled
                 onClick={onSubmitEvent}
                 className="bg-red-600 hover:bg-red-700 text-white"
             >
