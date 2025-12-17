@@ -1,5 +1,6 @@
 export { ConflictMap } from "./conflict-map"
 export { DisplacementSummary } from "./displacement-summary"
+export { EventModal } from "./event-modal"
 export { FilterBar } from "./filter-bar"
 export { FloatingMobileButton, ScrollDateBadge } from "./floating-elements"
 export { LiveStatusBadge } from "./live-status-badge"
