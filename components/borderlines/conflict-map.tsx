@@ -209,7 +209,7 @@ export function ConflictMap() {
                             aria-label="Map of Cambodia showing conflict areas"
                         />
                     </div>
-                    <p className="mt-3 px-3 py-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded">
+                    <p className="mt-3 px-3 py-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700">
                         <span className="inline-flex items-center gap-1">
                             <span className="w-2 h-2 rounded-full bg-red-600 inline-block"></span>
                             <span>Border sites</span>
