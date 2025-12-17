@@ -69,6 +69,7 @@ export function ConflictMap() {
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
+                                aria-hidden="true"
                             >
                                 <path
                                     strokeLinecap="round"
@@ -113,7 +114,7 @@ export function ConflictMap() {
                     {/* Conflict markers */}
                     <div className="absolute inset-0 p-4">
                         <div className="relative w-full h-full">
-                            {locations.slice(0, 15).map((location, idx) => {
+                            {locations.slice(0, 15).map((location) => {
                                 const pos = getPosition(
                                     location.lat,
                                     location.lng,
@@ -122,7 +123,7 @@ export function ConflictMap() {
 
                                 return (
                                     <button
-                                        key={idx}
+                                        key={`${location.lat}-${location.lng}`}
                                         type="button"
                                         className="absolute group cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
                                         style={{ top: pos.top, left: pos.left }}
@@ -157,7 +158,7 @@ export function ConflictMap() {
 
                     {/* Border Line Indicator */}
                     <div className="absolute inset-0 pointer-events-none">
-                        <svg className="w-full h-full">
+                        <svg className="w-full h-full" aria-hidden="true">
                             <path
                                 d="M 0,200 Q 150,180 200,220 T 400,200 T 600,180"
                                 fill="none"

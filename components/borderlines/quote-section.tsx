@@ -19,6 +19,7 @@ export function QuoteSection() {
                         className="w-64 h-48 text-white opacity-30"
                         viewBox="0 0 200 150"
                         fill="currentColor"
+                        aria-hidden="true"
                     >
                         {/* Simplified Angkor Wat silhouette */}
                         <path d="M100,20 L110,40 L115,40 L115,60 L125,60 L130,35 L140,35 L140,60 L145,60 L145,80 L155,80 L160,50 L170,50 L170,80 L180,80 L180,100 L20,100 L20,80 L30,80 L30,50 L40,50 L45,80 L55,80 L55,60 L60,60 L60,35 L70,35 L75,60 L85,60 L85,40 L90,40 Z" />
@@ -35,6 +36,7 @@ export function QuoteSection() {
                     className="w-10 h-10 mx-auto mb-6 text-zinc-600"
                     fill="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                 >
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
@@ -66,6 +68,7 @@ export function QuoteSection() {
                             className="w-4 h-4 text-red-400"
                             fill="currentColor"
                             viewBox="0 0 24 24"
+                            aria-hidden="true"
                         >
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                         </svg>
@@ -78,6 +81,7 @@ export function QuoteSection() {
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
+                            aria-hidden="true"
                         >
                             <path
                                 strokeLinecap="round"
@@ -101,6 +105,7 @@ export function QuoteSection() {
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
+                            aria-hidden="true"
                         >
                             <path
                                 strokeLinecap="round"

@@ -9,7 +9,7 @@ interface LiveStatusBadgeProps {
 }
 
 export function LiveStatusBadge({
-    status = "active",
+    status: _status = "active",
     className,
 }: LiveStatusBadgeProps) {
     return (

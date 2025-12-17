@@ -36,6 +36,7 @@ export function ScrollDateBadge({
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                 >
                     <path
                         strokeLinecap="round"
@@ -66,6 +67,7 @@ export function FloatingMobileButton({ onClick }: FloatingMobileButtonProps) {
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                 >
                     <path
                         strokeLinecap="round"

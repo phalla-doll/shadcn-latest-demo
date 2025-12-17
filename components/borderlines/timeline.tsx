@@ -29,6 +29,7 @@ const categoryConfig: Record<
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
             >
                 <path
                     strokeLinecap="round"
@@ -48,6 +49,7 @@ const categoryConfig: Record<
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
             >
                 <path
                     strokeLinecap="round"
@@ -67,6 +69,7 @@ const categoryConfig: Record<
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
             >
                 <path
                     strokeLinecap="round"
@@ -86,6 +89,7 @@ const categoryConfig: Record<
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
             >
                 <path
                     strokeLinecap="round"
@@ -105,6 +109,7 @@ const categoryConfig: Record<
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
             >
                 <path
                     strokeLinecap="round"
@@ -165,6 +170,7 @@ function EventCard({ event }: { event: ConflictEvent }) {
                                     className="w-3 h-3 mr-1"
                                     fill="currentColor"
                                     viewBox="0 0 24 24"
+                                    aria-hidden="true"
                                 >
                                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                                 </svg>
@@ -198,8 +204,8 @@ function EventCard({ event }: { event: ConflictEvent }) {
                 {event.sources.length > 0 && (
                     <div className="mt-2 flex items-center gap-2 text-xs text-zinc-500">
                         <span>Source:</span>
-                        {event.sources.map((source, idx) => (
-                            <span key={idx}>
+                        {event.sources.map((source) => (
+                            <span key={source.title}>
                                 {source.url ? (
                                     <a
                                         href={source.url}
@@ -278,6 +284,7 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
+                        aria-hidden="true"
                     >
                         <path
                             strokeLinecap="round"
