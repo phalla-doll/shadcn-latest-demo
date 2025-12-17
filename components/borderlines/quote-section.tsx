@@ -12,30 +12,12 @@ import { Separator } from "@/components/ui/separator"
 export function QuoteSection() {
     return (
         <section className="relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
-            {/* Flag Background - Semi-transparent Cambodia flag inspired */}
-            <div className="absolute inset-0 opacity-[0.07]">
-                {/* Blue stripe top */}
-                <div className="absolute top-0 left-0 right-0 h-1/4 bg-blue-600" />
-                {/* Red stripe middle */}
-                <div className="absolute top-1/4 left-0 right-0 h-1/2 bg-red-600" />
-                {/* Blue stripe bottom */}
-                <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-blue-600" />
-                {/* Angkor Wat silhouette overlay */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <svg
-                        className="w-64 h-48 text-white opacity-30"
-                        viewBox="0 0 200 150"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        {/* Simplified Angkor Wat silhouette */}
-                        <path d="M100,20 L110,40 L115,40 L115,60 L125,60 L130,35 L140,35 L140,60 L145,60 L145,80 L155,80 L160,50 L170,50 L170,80 L180,80 L180,100 L20,100 L20,80 L30,80 L30,50 L40,50 L45,80 L55,80 L55,60 L60,60 L60,35 L70,35 L75,60 L85,60 L85,40 L90,40 Z" />
-                        {/* Base */}
-                        <rect x="10" y="100" width="180" height="20" />
-                        <rect x="0" y="120" width="200" height="15" />
-                    </svg>
-                </div>
-            </div>
+            {/* Flag Background Image */}
+            <div 
+                className="absolute inset-0 opacity-[0.12] bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: "url('/flag_map.png')" }}
+                aria-hidden="true"
+            />
 
             {/* Content */}
             <div className="relative z-10 px-8 py-12 md:py-16 text-center">
