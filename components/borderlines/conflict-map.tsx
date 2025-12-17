@@ -2,7 +2,15 @@
 
 import { Location01Icon, MapsIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import type { Map as LeafletMap, Marker } from "leaflet"
 import { useEffect, useMemo, useRef, useState } from "react"
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { Badge } from "@/components/ui/badge"
 import {
     Card,
@@ -11,16 +19,8 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import {
-    AlertDialog,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
 import { EVENTS } from "@/constants"
 import type { ConflictEvent } from "@/types"
-import type { Map as LeafletMap, Marker } from "leaflet"
 
 function EventModal({
     event,
@@ -135,15 +135,18 @@ export function ConflictMap() {
         const loadLeaflet = async () => {
             try {
                 const L = await import("leaflet")
-                
+
                 if (!isMounted) return
 
                 // Set up Leaflet icon defaults to prevent 404 errors
                 delete (L.Icon.Default.prototype as any)._getIconUrl
                 L.Icon.Default.mergeOptions({
-                    iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-                    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-                    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+                    iconRetinaUrl:
+                        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+                    iconUrl:
+                        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+                    shadowUrl:
+                        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
                 })
 
                 setIsMapLoaded(true)
@@ -166,7 +169,7 @@ export function ConflictMap() {
         const initializeMap = async () => {
             try {
                 const L = await import("leaflet")
-                
+
                 if (!mapContainerRef.current) return
 
                 // Center map on Cambodia border region
