@@ -1,5 +1,15 @@
 "use client"
 
+import {
+    Calendar01Icon,
+    Flag01Icon,
+    FlashIcon,
+    JusticeScale01Icon,
+    News01Icon,
+    Tick02Icon,
+    UserGroupIcon,
+} from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
 import { useMemo, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -23,102 +33,27 @@ const categoryConfig: Record<
     Military: {
         color: "bg-red-500",
         badge: "destructive",
-        icon: (
-            <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-            >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-            </svg>
-        ),
+        icon: <HugeiconsIcon icon={FlashIcon} className="w-4 h-4" />,
     },
     Civilian: {
         color: "bg-amber-500",
         badge: "secondary",
-        icon: (
-            <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-            >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-            </svg>
-        ),
+        icon: <HugeiconsIcon icon={UserGroupIcon} className="w-4 h-4" />,
     },
     Diplomatic: {
         color: "bg-blue-500",
         badge: "outline",
-        icon: (
-            <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-            >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                />
-            </svg>
-        ),
+        icon: <HugeiconsIcon icon={News01Icon} className="w-4 h-4" />,
     },
     Political: {
         color: "bg-purple-500",
         badge: "default",
-        icon: (
-            <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-            >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
-                />
-            </svg>
-        ),
+        icon: <HugeiconsIcon icon={Flag01Icon} className="w-4 h-4" />,
     },
     Legal: {
         color: "bg-emerald-500",
         badge: "default",
-        icon: (
-            <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-            >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-                />
-            </svg>
-        ),
+        icon: <HugeiconsIcon icon={JusticeScale01Icon} className="w-4 h-4" />,
     },
 }
 
@@ -166,14 +101,11 @@ function EventCard({ event }: { event: ConflictEvent }) {
                                 variant="outline"
                                 className="border-emerald-300 dark:border-emerald-700/50 text-emerald-600 dark:text-emerald-400 text-xs"
                             >
-                                <svg
+                                <HugeiconsIcon
+                                    icon={Tick02Icon}
                                     className="w-3 h-3 mr-1"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                >
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                                </svg>
+                                    strokeWidth={2.5}
+                                />
                                 Verified
                             </Badge>
                         )}
@@ -279,20 +211,10 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
         <div className="space-y-2">
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                    <svg
+                    <HugeiconsIcon
+                        icon={Calendar01Icon}
                         className="w-5 h-5 text-zinc-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                    </svg>
+                    />
                     <h3 className="text-lg font-medium text-zinc-900 dark:text-white">
                         Event Timeline
                     </h3>
