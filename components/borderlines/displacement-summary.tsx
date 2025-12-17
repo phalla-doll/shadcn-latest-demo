@@ -170,8 +170,12 @@ export function DisplacementSummary() {
                         </CardDescription>
                     </div>
                     <div className="text-right">
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400">Regions Affected</p>
-                        <p className="text-sm font-medium text-zinc-900 dark:text-white">Military Regions 4 & 5</p>
+                        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                            Regions Affected
+                        </p>
+                        <p className="text-sm font-medium text-zinc-900 dark:text-white">
+                            Military Regions 4 & 5
+                        </p>
                     </div>
                 </div>
             </CardHeader>
