@@ -118,7 +118,7 @@ export function DisplacementSummary() {
                             icon={
                                 <HugeiconsIcon
                                     icon={UserGroupIcon}
-                                    className="w-6 h-6"
+                                    className="size-6"
                                     strokeWidth={2}
                                 />
                             }
@@ -130,7 +130,7 @@ export function DisplacementSummary() {
                             icon={
                                 <HugeiconsIcon
                                     icon={AlertDiamondIcon}
-                                    className="w-6 h-6"
+                                    className="size-6"
                                     strokeWidth={2}
                                 />
                             }
@@ -143,7 +143,7 @@ export function DisplacementSummary() {
                             icon={
                                 <HugeiconsIcon
                                     icon={HeartbreakIcon}
-                                    className="w-6 h-6"
+                                    className="size-6"
                                     strokeWidth={2}
                                 />
                             }
@@ -171,7 +171,7 @@ export function DisplacementSummary() {
                             icon={
                                 <HugeiconsIcon
                                     icon={School01Icon}
-                                    className="w-6 h-6"
+                                    className="size-6"
                                     strokeWidth={2}
                                 />
                             }
@@ -183,7 +183,7 @@ export function DisplacementSummary() {
                             icon={
                                 <HugeiconsIcon
                                     icon={TeacherIcon}
-                                    className="w-6 h-6"
+                                    className="size-6"
                                     strokeWidth={2}
                                 />
                             }
@@ -194,7 +194,7 @@ export function DisplacementSummary() {
                             icon={
                                 <HugeiconsIcon
                                     icon={StudentIcon}
-                                    className="w-6 h-6"
+                                    className="size-6"
                                     strokeWidth={2}
                                 />
                             }
