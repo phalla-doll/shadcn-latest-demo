@@ -1,10 +1,7 @@
 "use client"
 
 import {
-    FavouriteIcon,
-    QuoteUpIcon,
-    SecurityCheckIcon,
-    ViewIcon,
+    QuoteUpIcon
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Separator } from "@/components/ui/separator"
@@ -13,8 +10,8 @@ export function QuoteSection() {
     return (
         <section className="relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
             {/* Flag Background Image */}
-            <div 
-                className="absolute inset-0 opacity-[0.12] bg-cover bg-center bg-no-repeat"
+            <div
+                className="absolute inset-0 opacity-[0.12] bg-contain bg-center bg-no-repeat"
                 style={{ backgroundImage: "url('/flag_map.png')" }}
                 aria-hidden="true"
             />
@@ -48,33 +45,7 @@ export function QuoteSection() {
                     </p>
                 </blockquote>
 
-                <Separator className="bg-gradient-to-r from-transparent via-red-500/50 to-transparent h-0.5 max-w-md mx-auto mt-8" />
-
-                <div className="mt-6 flex items-center justify-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
-                    <span className="flex items-center gap-2">
-                        <HugeiconsIcon
-                            icon={FavouriteIcon}
-                            className="w-4 h-4 text-red-400"
-                        />
-                        Solidarity
-                    </span>
-                    <span className="text-zinc-400 dark:text-zinc-600">•</span>
-                    <span className="flex items-center gap-2">
-                        <HugeiconsIcon
-                            icon={ViewIcon}
-                            className="w-4 h-4 text-amber-400"
-                        />
-                        Transparency
-                    </span>
-                    <span className="text-zinc-400 dark:text-zinc-600">•</span>
-                    <span className="flex items-center gap-2">
-                        <HugeiconsIcon
-                            icon={SecurityCheckIcon}
-                            className="w-4 h-4 text-blue-400"
-                        />
-                        Truth
-                    </span>
-                </div>
+                <Separator className="bg-linear-to-r from-transparent via-red-500/50 to-transparent h-0.5 max-w-md mx-auto mt-8" />
             </div>
         </section>
     )
