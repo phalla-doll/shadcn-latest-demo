@@ -7,6 +7,7 @@ import {
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useTheme } from "next-themes"
+import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
 
 export function SiteFooter() {
@@ -75,12 +76,14 @@ export function SiteFooter() {
                         <Separator className="bg-zinc-200 dark:bg-zinc-800 my-4 md:hidden" />
 
                         <div className="flex flex-wrap gap-4 mt-4 md:justify-end text-sm">
-                            <button
-                                type="button"
+                            <Link
+                                href="https://boycott-thailand.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-red-500 hover:text-red-400 transition-colors font-medium"
                             >
                                 #BoycottThailand
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
