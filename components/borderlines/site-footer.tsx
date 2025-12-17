@@ -9,12 +9,15 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { Separator } from "@/components/ui/separator"
+import { Switch } from "@/components/ui/switch"
 
 export function SiteFooter() {
     const { theme, setTheme } = useTheme()
 
-    const toggleTheme = () => {
-        setTheme(theme === "dark" ? "light" : "dark")
+    const isDark = theme === "dark"
+
+    const handleThemeChange = (checked: boolean) => {
+        setTheme(checked ? "dark" : "light")
     }
 
     return (
@@ -42,21 +45,19 @@ export function SiteFooter() {
                             sources and eyewitness accounts.
                         </p>
                         <div className="flex items-center gap-4 mt-4">
-                            <button
-                                type="button"
-                                onClick={toggleTheme}
-                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                            <HugeiconsIcon
+                                icon={Sun03Icon}
+                                className="w-4 h-4 text-zinc-500"
+                            />
+                            <Switch
+                                checked={isDark}
+                                onCheckedChange={handleThemeChange}
                                 aria-label="Toggle theme"
-                            >
-                                <HugeiconsIcon
-                                    icon={
-                                        theme === "dark"
-                                            ? Sun03Icon
-                                            : Moon02Icon
-                                    }
-                                    className="w-5 h-5"
-                                />
-                            </button>
+                            />
+                            <HugeiconsIcon
+                                icon={Moon02Icon}
+                                className="w-4 h-4 text-zinc-500"
+                            />
                         </div>
                     </div>
 
