@@ -1,8 +1,8 @@
 "use client"
 
-import { MapsIcon } from "@hugeicons/core-free-icons"
+import { Location01Icon, MapsIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { useMemo } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import {
     Card,
@@ -11,178 +11,296 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { EVENTS } from "@/constants"
+import type { ConflictEvent } from "@/types"
+import type { Map as LeafletMap, Marker } from "leaflet"
+
+function EventModal({
+    event,
+    onClose,
+}: {
+    event: ConflictEvent
+    onClose: () => void
+}) {
+    return (
+        <AlertDialog open={!!event} onOpenChange={(open) => !open && onClose()}>
+            <AlertDialogContent className="max-w-2xl">
+                <AlertDialogHeader>
+                    <AlertDialogTitle className="text-xl">
+                        {event.title}
+                    </AlertDialogTitle>
+                    <AlertDialogDescription className="space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+                            <HugeiconsIcon
+                                icon={Location01Icon}
+                                className="w-4 h-4"
+                            />
+                            {event.location}
+                        </div>
+                        <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                            {event.displayDate}
+                        </div>
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <div className="mt-4 space-y-4">
+                    <div>
+                        <Badge
+                            variant="outline"
+                            className="mb-2 border-zinc-300 dark:border-zinc-700"
+                        >
+                            {event.category}
+                        </Badge>
+                        <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                            {event.description}
+                        </p>
+                    </div>
+                    {event.sources.length > 0 && (
+                        <div className="pt-2 border-t border-zinc-200 dark:border-zinc-700">
+                            <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-2">
+                                Sources:
+                            </p>
+                            <ul className="space-y-1">
+                                {event.sources.map((source) => (
+                                    <li key={source.title} className="text-xs">
+                                        {source.url ? (
+                                            <a
+                                                href={source.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-blue-500 hover:underline"
+                                            >
+                                                {source.title}
+                                            </a>
+                                        ) : (
+                                            <span className="text-zinc-600 dark:text-zinc-400">
+                                                {source.title}
+                                            </span>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            </AlertDialogContent>
+        </AlertDialog>
+    )
+}
 
 export function ConflictMap() {
-    // Get unique locations with coordinates from events
-    const locations = useMemo(() => {
-        const locationMap = new Map<
+    const mapContainerRef = useRef<HTMLDivElement>(null)
+    const mapInstanceRef = useRef<LeafletMap | null>(null)
+    const markersRef = useRef<Marker[]>([])
+    const [selectedEvent, setSelectedEvent] = useState<ConflictEvent | null>(
+        null,
+    )
+    const [isMapLoaded, setIsMapLoaded] = useState(false)
+
+    // Get unique conflict locations from EVENTS with their coordinates and first event
+    const conflictLocations = useMemo(() => {
+        const locationsByKey = new Map<
             string,
-            { lat: number; lng: number; count: number; name: string }
+            { label: string; lat: number; lng: number; event: ConflictEvent }
         >()
 
-        for (const event of EVENTS) {
-            if (event.coordinates) {
-                const key = `${event.coordinates.lat.toFixed(2)},${event.coordinates.lng.toFixed(2)}`
-                const existing = locationMap.get(key)
-                if (existing) {
-                    existing.count++
-                } else {
-                    locationMap.set(key, {
+        EVENTS.forEach((event) => {
+            if (event.coordinates && event.location) {
+                // Use the location name as key, but create a clean label
+                const key = event.location
+                if (!locationsByKey.has(key)) {
+                    locationsByKey.set(key, {
+                        label: event.location,
                         lat: event.coordinates.lat,
                         lng: event.coordinates.lng,
-                        count: 1,
-                        name: event.location.split(",")[0].trim(),
+                        event: event,
                     })
                 }
             }
-        }
+        })
 
-        return Array.from(locationMap.values())
+        return Array.from(locationsByKey.values())
     }, [])
 
-    // Calculate marker positions relative to map bounds
-    // Border region roughly: lat 11.5-14.5, lng 102.3-105.5
-    const getPosition = (lat: number, lng: number) => {
-        const minLat = 11.5,
-            maxLat = 14.5
-        const minLng = 102.3,
-            maxLng = 105.5
+    // Load Leaflet dynamically
+    useEffect(() => {
+        let isMounted = true
 
-        const top = ((maxLat - lat) / (maxLat - minLat)) * 100
-        const left = ((lng - minLng) / (maxLng - minLng)) * 100
+        const loadLeaflet = async () => {
+            try {
+                const L = await import("leaflet")
+                
+                if (!isMounted) return
 
-        return {
-            top: `${Math.max(5, Math.min(90, top))}%`,
-            left: `${Math.max(5, Math.min(90, left))}%`,
+                // Set up Leaflet icon defaults to prevent 404 errors
+                delete (L.Icon.Default.prototype as any)._getIconUrl
+                L.Icon.Default.mergeOptions({
+                    iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+                    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+                    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+                })
+
+                setIsMapLoaded(true)
+            } catch (error) {
+                console.error("Failed to load Leaflet", error)
+            }
         }
-    }
 
-    const activeZones = locations.filter((l) => l.count >= 5).length
+        loadLeaflet()
+
+        return () => {
+            isMounted = false
+        }
+    }, [])
+
+    // Initialize Leaflet Map
+    useEffect(() => {
+        if (!mapContainerRef.current || !isMapLoaded) return
+
+        const initializeMap = async () => {
+            try {
+                const L = await import("leaflet")
+                
+                if (!mapContainerRef.current) return
+
+                // Center map on Cambodia border region
+                const centerLat = 13.3
+                const centerLng = 103.9
+                const zoom = 7.4
+
+                // Cleanup previous instance
+                if (mapInstanceRef.current) {
+                    // Remove all markers
+                    markersRef.current.forEach((marker) => {
+                        mapInstanceRef.current?.removeLayer(marker)
+                    })
+                    markersRef.current = []
+                    mapInstanceRef.current.remove()
+                    mapInstanceRef.current = null
+                }
+
+                const map = L.map(mapContainerRef.current).setView(
+                    [centerLat, centerLng],
+                    zoom,
+                )
+                mapInstanceRef.current = map
+
+                // Add tile layer (light theme to match journal style)
+                L.tileLayer(
+                    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                    {
+                        attribution:
+                            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                        subdomains: "abcd",
+                        maxZoom: 19,
+                    },
+                ).addTo(map)
+
+                // Create red dot icon for conflict markers
+                const redDotIcon = L.divIcon({
+                    className: "custom-conflict-marker",
+                    html: `<div style="background-color: #dc2626; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fee2e2; box-shadow: 0 2px 4px rgba(0,0,0,0.2); cursor: pointer;"></div>`,
+                    iconSize: [12, 12],
+                    iconAnchor: [6, 6],
+                })
+
+                // Add markers for each conflict location
+                conflictLocations.forEach((loc) => {
+                    const marker = L.marker([loc.lat, loc.lng], {
+                        icon: redDotIcon,
+                    }).addTo(map)
+
+                    // Add click handler to open EventModal inside the map
+                    marker.on("click", () => {
+                        setSelectedEvent(loc.event)
+                    })
+
+                    markersRef.current.push(marker)
+                })
+
+                // Force a resize to prevent gray box issues
+                setTimeout(() => {
+                    map.invalidateSize()
+                }, 100)
+            } catch (e) {
+                console.error("Map initialization failed", e)
+            }
+        }
+
+        initializeMap()
+
+        return () => {
+            if (mapInstanceRef.current) {
+                markersRef.current.forEach((marker) => {
+                    mapInstanceRef.current?.removeLayer(marker)
+                })
+                markersRef.current = []
+                mapInstanceRef.current.remove()
+                mapInstanceRef.current = null
+            }
+        }
+    }, [conflictLocations, isMapLoaded])
+
+    const activeZones = conflictLocations.length
 
     return (
-        <Card className="bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800">
-            <CardHeader>
-                <div className="flex items-center justify-between">
-                    <div>
-                        <CardTitle className="text-zinc-900 dark:text-white flex items-center gap-2">
-                            <HugeiconsIcon
-                                icon={MapsIcon}
-                                className="w-5 h-5 text-red-400"
-                            />
-                            Conflict Map – Key Areas
-                        </CardTitle>
-                        <CardDescription className="text-zinc-500 dark:text-zinc-400">
-                            Interactive map showing conflict zones along the
-                            border ({EVENTS.length} events documented)
-                        </CardDescription>
-                    </div>
-                    <Badge
-                        variant="outline"
-                        className="border-red-300 dark:border-red-700/50 text-red-600 dark:text-red-300"
-                    >
-                        {activeZones} Active Zones
-                    </Badge>
-                </div>
-            </CardHeader>
-            <CardContent>
-                {/* Map Placeholder - In production, integrate Leaflet here */}
-                <div className="relative w-full h-80 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
-                    {/* Map Background with gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/50 via-zinc-100 to-amber-100/50 dark:from-emerald-900/20 dark:via-zinc-800 dark:to-amber-900/20" />
-
-                    {/* Grid lines for map effect */}
-                    <div
-                        className="absolute inset-0 opacity-20"
-                        style={{
-                            backgroundImage: `
-                                linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-                                linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
-                            `,
-                            backgroundSize: "40px 40px",
-                        }}
-                    />
-
-                    {/* Conflict markers */}
-                    <div className="absolute inset-0 p-4">
-                        <div className="relative w-full h-full">
-                            {locations.slice(0, 15).map((location) => {
-                                const pos = getPosition(
-                                    location.lat,
-                                    location.lng,
-                                )
-                                const isActive = location.count >= 5
-
-                                return (
-                                    <button
-                                        key={`${location.lat}-${location.lng}`}
-                                        type="button"
-                                        className="absolute group cursor-pointer transform -translate-x-1/2 -translate-y-1/2"
-                                        style={{ top: pos.top, left: pos.left }}
-                                    >
-                                        <span
-                                            className={`relative flex ${isActive ? "h-4 w-4" : "h-3 w-3"}`}
-                                        >
-                                            {isActive && (
-                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                                            )}
-                                            <span
-                                                className={`relative inline-flex rounded-full ${isActive ? "h-4 w-4 bg-red-500 border-2 border-red-300" : "h-3 w-3 bg-amber-500 border border-amber-300"}`}
-                                            />
-                                        </span>
-                                        <span className="absolute left-6 top-0 hidden group-hover:block bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10 border border-zinc-200 dark:border-zinc-700 shadow-md">
-                                            {location.name} ({location.count}{" "}
-                                            events)
-                                        </span>
-                                    </button>
-                                )
-                            })}
+        <>
+            <Card className="bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800">
+                <CardHeader>
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <CardTitle className="text-zinc-900 dark:text-white flex items-center gap-2">
+                                <HugeiconsIcon
+                                    icon={MapsIcon}
+                                    className="w-5 h-5 text-red-400"
+                                />
+                                Conflict Map – Key Areas
+                            </CardTitle>
+                            <CardDescription className="text-zinc-500 dark:text-zinc-400">
+                                Interactive map showing conflict zones along the
+                                border ({EVENTS.length} events documented)
+                            </CardDescription>
                         </div>
+                        <Badge
+                            variant="outline"
+                            className="border-red-300 dark:border-red-700/50 text-red-600 dark:text-red-300"
+                        >
+                            {activeZones} Active Zones
+                        </Badge>
                     </div>
+                </CardHeader>
+                <CardContent>
+                    <div className="relative w-full aspect-16/10 md:aspect-video rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700">
+                        <div
+                            ref={mapContainerRef}
+                            className="w-full h-full"
+                            role="img"
+                            aria-label="Map of Cambodia showing conflict areas"
+                        />
+                    </div>
+                    <p className="mt-3 px-3 py-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded">
+                        <span className="inline-flex items-center gap-1">
+                            <span className="w-2 h-2 rounded-full bg-red-600 inline-block"></span>
+                            <span>Border sites</span>
+                        </span>{" "}
+                        — Marker precision is limited by the available location
+                        data.
+                    </p>
+                </CardContent>
+            </Card>
 
-                    {/* Country Labels */}
-                    <div className="absolute top-4 left-4 text-zinc-500 dark:text-zinc-400 text-sm font-medium">
-                        THAILAND
-                    </div>
-                    <div className="absolute bottom-4 right-4 text-zinc-500 dark:text-zinc-400 text-sm font-medium">
-                        CAMBODIA
-                    </div>
-
-                    {/* Border Line Indicator */}
-                    <div className="absolute inset-0 pointer-events-none">
-                        <svg className="w-full h-full" aria-hidden="true">
-                            <path
-                                d="M 0,200 Q 150,180 200,220 T 400,200 T 600,180"
-                                fill="none"
-                                stroke="rgba(239,68,68,0.4)"
-                                strokeWidth="2"
-                                strokeDasharray="8,4"
-                            />
-                        </svg>
-                    </div>
-                </div>
-
-                {/* Legend */}
-                <div className="flex items-center gap-6 mt-4 text-sm">
-                    <div className="flex items-center gap-2">
-                        <span className="relative flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500" />
-                        </span>
-                        <span className="text-zinc-500 dark:text-zinc-400">
-                            Active Conflict Zone (5+ events)
-                        </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <span className="relative flex h-3 w-3">
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500" />
-                        </span>
-                        <span className="text-zinc-500 dark:text-zinc-400">
-                            Recent Incident
-                        </span>
-                    </div>
-                </div>
-            </CardContent>
-        </Card>
+            {selectedEvent && (
+                <EventModal
+                    event={selectedEvent}
+                    onClose={() => setSelectedEvent(null)}
+                />
+            )}
+        </>
     )
 }
