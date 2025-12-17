@@ -1,12 +1,9 @@
 "use client"
 
 import {
-    Facebook01Icon,
     LegalDocument01Icon,
     Moon02Icon,
-    NewTwitterIcon,
     Sun03Icon,
-    TelegramIcon,
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useTheme } from "next-themes"
@@ -46,43 +43,16 @@ export function SiteFooter() {
                         <div className="flex items-center gap-4 mt-4">
                             <button
                                 type="button"
-                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                                aria-label="Twitter"
-                            >
-                                <HugeiconsIcon
-                                    icon={NewTwitterIcon}
-                                    className="w-5 h-5"
-                                />
-                            </button>
-                            <button
-                                type="button"
-                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                                aria-label="Telegram"
-                            >
-                                <HugeiconsIcon
-                                    icon={TelegramIcon}
-                                    className="w-5 h-5"
-                                />
-                            </button>
-                            <button
-                                type="button"
-                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                                aria-label="Facebook"
-                            >
-                                <HugeiconsIcon
-                                    icon={Facebook01Icon}
-                                    className="w-5 h-5"
-                                />
-                            </button>
-                            <div className="w-px h-4 bg-zinc-300 dark:bg-zinc-700" />
-                            <button
-                                type="button"
                                 onClick={toggleTheme}
                                 className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                                 aria-label="Toggle theme"
                             >
                                 <HugeiconsIcon
-                                    icon={theme === "dark" ? Sun03Icon : Moon02Icon}
+                                    icon={
+                                        theme === "dark"
+                                            ? Sun03Icon
+                                            : Moon02Icon
+                                    }
                                     className="w-5 h-5"
                                 />
                             </button>
@@ -105,30 +75,6 @@ export function SiteFooter() {
                         <Separator className="bg-zinc-200 dark:bg-zinc-800 my-4 md:hidden" />
 
                         <div className="flex flex-wrap gap-4 mt-4 md:justify-end text-sm">
-                            <button
-                                type="button"
-                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                            >
-                                About
-                            </button>
-                            <button
-                                type="button"
-                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                            >
-                                Methodology
-                            </button>
-                            <button
-                                type="button"
-                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                            >
-                                Contact
-                            </button>
-                            <button
-                                type="button"
-                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                            >
-                                Privacy
-                            </button>
                             <button
                                 type="button"
                                 className="text-red-500 hover:text-red-400 transition-colors font-medium"
