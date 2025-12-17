@@ -1,6 +1,10 @@
 "use client"
 
-import { Cancel01Icon, PlusSignIcon, Tick02Icon } from "@hugeicons/core-free-icons"
+import {
+    Cancel01Icon,
+    PlusSignIcon,
+    Tick02Icon,
+} from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useMemo } from "react"
 import { Badge } from "@/components/ui/badge"
@@ -57,7 +61,9 @@ export function FilterBar({
                 <div className="flex items-center gap-1.5">
                     <Select
                         value={locationFilter}
-                        onValueChange={(value) => onLocationChange(value ?? "all")}
+                        onValueChange={(value) =>
+                            onLocationChange(value ?? "all")
+                        }
                     >
                         <SelectTrigger className="w-52 bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white">
                             <SelectValue>
@@ -88,7 +94,11 @@ export function FilterBar({
                             onClick={() => onLocationChange("all")}
                             className="size-8 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
                         >
-                            <HugeiconsIcon icon={Cancel01Icon} className="size-4" strokeWidth={2} />
+                            <HugeiconsIcon
+                                icon={Cancel01Icon}
+                                className="size-4"
+                                strokeWidth={2}
+                            />
                             <span className="sr-only">Clear filter</span>
                         </Button>
                     )}

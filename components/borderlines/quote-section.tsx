@@ -1,8 +1,6 @@
 "use client"
 
-import {
-    QuoteUpIcon
-} from "@hugeicons/core-free-icons"
+import { QuoteUpIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Separator } from "@/components/ui/separator"
 
