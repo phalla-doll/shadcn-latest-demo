@@ -31,9 +31,9 @@ interface StatCardProps {
 
 function StatCard({ label, value, icon, variant = "default" }: StatCardProps) {
     const variantStyles = {
-        default: "bg-zinc-800/50 border-zinc-700",
-        warning: "bg-amber-950/30 border-amber-800/50",
-        danger: "bg-red-950/30 border-red-800/50",
+        default: "bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700",
+        warning: "bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/50",
+        danger: "bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800/50",
     }
 
     const iconStyles = {
@@ -46,10 +46,10 @@ function StatCard({ label, value, icon, variant = "default" }: StatCardProps) {
         <div className={`rounded-lg border p-4 ${variantStyles[variant]}`}>
             <div className="flex items-start justify-between">
                 <div>
-                    <p className="text-zinc-400 text-xs uppercase tracking-wider mb-1">
+                    <p className="text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1">
                         {label}
                     </p>
-                    <p className="text-2xl font-bold text-white tabular-nums">
+                    <p className="text-2xl font-bold text-zinc-900 dark:text-white tabular-nums">
                         {typeof value === "number"
                             ? value.toLocaleString()
                             : value}
@@ -153,13 +153,13 @@ export function DisplacementSummary() {
     )
 
     return (
-        <Card className="bg-zinc-900/50 border-zinc-800">
-            <CardHeader className="border-b border-zinc-800">
+        <Card className="bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800">
+            <CardHeader className="border-b border-zinc-200 dark:border-zinc-800">
                 <div className="flex items-center justify-between">
                     <div>
-                        <CardTitle className="text-white flex items-center gap-2">
+                        <CardTitle className="text-zinc-900 dark:text-white flex items-center gap-2">
                             <svg
-                                className="w-5 h-5 text-amber-400"
+                                className="w-5 h-5 text-amber-500 dark:text-amber-400"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -174,13 +174,13 @@ export function DisplacementSummary() {
                             </svg>
                             Civilian Impact Situation
                         </CardTitle>
-                        <CardDescription className="text-zinc-400">
+                        <CardDescription className="text-zinc-500 dark:text-zinc-400">
                             As of December 17, 2025, 12:30
                         </CardDescription>
                     </div>
                     <Badge
                         variant="outline"
-                        className="border-zinc-700 text-zinc-300"
+                        className="border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300"
                     >
                         {stats.totalEvents} documented events over{" "}
                         {stats.daySpan} days
@@ -235,15 +235,15 @@ export function DisplacementSummary() {
                     </div>
                 </div>
 
-                <Separator className="bg-zinc-800" />
+                <Separator className="bg-zinc-200 dark:bg-zinc-800" />
 
                 {/* Event Statistics Grid */}
                 <div>
-                    <h4 className="text-zinc-300 text-sm font-medium mb-2 flex items-center gap-2">
+                    <h4 className="text-zinc-700 dark:text-zinc-300 text-sm font-medium mb-2 flex items-center gap-2">
                         <span className="w-1 h-4 bg-blue-500 rounded-full" />
                         Education Impact
                     </h4>
-                    <p className="text-zinc-400 text-sm mb-4">
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
                         Schools along the border across 6 provinces have been
                         temporarily closed due to the conflict.
                     </p>
@@ -284,20 +284,20 @@ export function DisplacementSummary() {
                             }
                         />
                     </div>
-                    <p className="text-zinc-500 text-xs mb-4 text-right mt-2">
+                    <p className="text-zinc-400 dark:text-zinc-500 text-xs mb-4 text-right mt-2">
                         Sources:{" "}
                         <Link
                             href="https://www.facebook.com/share/p/1D3uyDeXKp/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-zinc-400 hover:underline"
+                            className="text-zinc-500 dark:text-zinc-400 hover:underline"
                         >
                             Ministry of Education
                         </Link>
                     </p>
                 </div>
 
-                <Separator className="bg-zinc-800" />
+                <Separator className="bg-zinc-200 dark:bg-zinc-800" />
 
                 {/* Province Breakdown Table */}
                 <div>
@@ -305,20 +305,20 @@ export function DisplacementSummary() {
                         <span className="w-1 h-4 bg-emerald-500 rounded-full" />
                         Province Breakdown
                     </h4>
-                    <div className="overflow-x-auto rounded-lg border border-zinc-800">
+                    <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
                         <table className="w-full text-sm">
                             <thead>
-                                <tr className="bg-zinc-800/50">
-                                    <th className="text-left py-3 px-4 text-zinc-400 font-medium">
+                                <tr className="bg-zinc-50 dark:bg-zinc-800/50">
+                                    <th className="text-left py-3 px-4 text-zinc-500 dark:text-zinc-400 font-medium">
                                         Province
                                     </th>
-                                    <th className="text-right py-3 px-4 text-zinc-400 font-medium">
+                                    <th className="text-right py-3 px-4 text-zinc-500 dark:text-zinc-400 font-medium">
                                         Families
                                     </th>
-                                    <th className="text-right py-3 px-4 text-zinc-400 font-medium">
+                                    <th className="text-right py-3 px-4 text-zinc-500 dark:text-zinc-400 font-medium">
                                         People
                                     </th>
-                                    <th className="text-right py-3 px-4 text-zinc-400 font-medium">
+                                    <th className="text-right py-3 px-4 text-zinc-500 dark:text-zinc-400 font-medium">
                                         Deaths
                                     </th>
                                 </tr>
@@ -327,18 +327,18 @@ export function DisplacementSummary() {
                                 {provinceData.map((province, index) => (
                                     <tr
                                         key={province.province}
-                                        className={`border-t border-zinc-800 ${
+                                        className={`border-t border-zinc-200 dark:border-zinc-800 ${
                                             index % 2 === 0
-                                                ? "bg-zinc-900/30"
+                                                ? "bg-zinc-50/50 dark:bg-zinc-900/30"
                                                 : ""
-                                        } hover:bg-zinc-800/30 transition-colors`}
+                                        } hover:bg-zinc-100/50 dark:hover:bg-zinc-800/30 transition-colors`}
                                     >
                                         <td
-                                            className={`py-3 px-4 font-medium ${province.pending ? "text-zinc-500 italic" : "text-white"}`}
+                                            className={`py-3 px-4 font-medium ${province.pending ? "text-zinc-400 dark:text-zinc-500 italic" : "text-zinc-900 dark:text-white"}`}
                                         >
                                             {province.province}
                                         </td>
-                                        <td className="py-3 px-4 text-right text-zinc-300 tabular-nums">
+                                        <td className="py-3 px-4 text-right text-zinc-600 dark:text-zinc-300 tabular-nums">
                                             {province.families !== null
                                                 ? province.families.toLocaleString()
                                                 : "—"}
@@ -355,14 +355,14 @@ export function DisplacementSummary() {
                                 ))}
                             </tbody>
                             <tfoot>
-                                <tr className="border-t-2 border-zinc-700 bg-zinc-800/50 font-medium">
-                                    <td className="py-3 px-4 text-white">
+                                <tr className="border-t-2 border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 font-medium">
+                                    <td className="py-3 px-4 text-zinc-900 dark:text-white">
                                         Total
                                     </td>
-                                    <td className="py-3 px-4 text-right text-white tabular-nums">
+                                    <td className="py-3 px-4 text-right text-zinc-900 dark:text-white tabular-nums">
                                         {totalFamilies.toLocaleString()}
                                     </td>
-                                    <td className="py-3 px-4 text-right text-white tabular-nums">
+                                    <td className="py-3 px-4 text-right text-zinc-900 dark:text-white tabular-nums">
                                         {totalDisplaced.toLocaleString()}
                                     </td>
                                     <td className="py-3 px-4 text-right text-red-400 tabular-nums">

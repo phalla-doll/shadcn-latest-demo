@@ -29,7 +29,7 @@ export function ScrollDateBadge({
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-40 animate-in slide-in-from-top-4 fade-in duration-300">
             <Badge
                 variant="secondary"
-                className="bg-zinc-900/95 text-white border border-zinc-700 shadow-lg backdrop-blur px-4 py-2"
+                className="bg-white/95 dark:bg-zinc-900/95 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 shadow-lg backdrop-blur px-4 py-2"
             >
                 <svg
                     className="w-4 h-4 mr-2 text-red-400"

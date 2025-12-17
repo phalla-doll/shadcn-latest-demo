@@ -16,7 +16,7 @@ export function LiveStatusBadge({
         <Badge
             variant="destructive"
             className={cn(
-                "gap-2 bg-red-950 text-red-200 border-red-800/50",
+                "gap-2 bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-200 border-red-200 dark:border-red-800/50",
                 className,
             )}
         >

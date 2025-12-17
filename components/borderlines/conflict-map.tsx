@@ -59,11 +59,11 @@ export function ConflictMap() {
     const activeZones = locations.filter((l) => l.count >= 5).length
 
     return (
-        <Card className="bg-zinc-900/50 border-zinc-800">
+        <Card className="bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800">
             <CardHeader>
                 <div className="flex items-center justify-between">
                     <div>
-                        <CardTitle className="text-white flex items-center gap-2">
+                        <CardTitle className="text-zinc-900 dark:text-white flex items-center gap-2">
                             <svg
                                 className="w-5 h-5 text-red-400"
                                 fill="none"
@@ -80,14 +80,14 @@ export function ConflictMap() {
                             </svg>
                             Conflict Map – Key Areas
                         </CardTitle>
-                        <CardDescription className="text-zinc-400">
+                        <CardDescription className="text-zinc-500 dark:text-zinc-400">
                             Interactive map showing conflict zones along the
                             border ({EVENTS.length} events documented)
                         </CardDescription>
                     </div>
                     <Badge
                         variant="outline"
-                        className="border-red-700/50 text-red-300"
+                        className="border-red-300 dark:border-red-700/50 text-red-600 dark:text-red-300"
                     >
                         {activeZones} Active Zones
                     </Badge>
@@ -95,9 +95,9 @@ export function ConflictMap() {
             </CardHeader>
             <CardContent>
                 {/* Map Placeholder - In production, integrate Leaflet here */}
-                <div className="relative w-full h-80 rounded-lg overflow-hidden bg-zinc-800 border border-zinc-700">
+                <div className="relative w-full h-80 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
                     {/* Map Background with gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-zinc-800 to-amber-900/20" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/50 via-zinc-100 to-amber-100/50 dark:from-emerald-900/20 dark:via-zinc-800 dark:to-amber-900/20" />
 
                     {/* Grid lines for map effect */}
                     <div
@@ -138,7 +138,7 @@ export function ConflictMap() {
                                                 className={`relative inline-flex rounded-full ${isActive ? "h-4 w-4 bg-red-500 border-2 border-red-300" : "h-3 w-3 bg-amber-500 border border-amber-300"}`}
                                             />
                                         </span>
-                                        <span className="absolute left-6 top-0 hidden group-hover:block bg-zinc-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10 border border-zinc-700">
+                                        <span className="absolute left-6 top-0 hidden group-hover:block bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10 border border-zinc-200 dark:border-zinc-700 shadow-md">
                                             {location.name} ({location.count}{" "}
                                             events)
                                         </span>
@@ -149,10 +149,10 @@ export function ConflictMap() {
                     </div>
 
                     {/* Country Labels */}
-                    <div className="absolute top-4 left-4 text-zinc-400 text-sm font-medium">
+                    <div className="absolute top-4 left-4 text-zinc-500 dark:text-zinc-400 text-sm font-medium">
                         THAILAND
                     </div>
-                    <div className="absolute bottom-4 right-4 text-zinc-400 text-sm font-medium">
+                    <div className="absolute bottom-4 right-4 text-zinc-500 dark:text-zinc-400 text-sm font-medium">
                         CAMBODIA
                     </div>
 
@@ -177,7 +177,7 @@ export function ConflictMap() {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500" />
                         </span>
-                        <span className="text-zinc-400">
+                        <span className="text-zinc-500 dark:text-zinc-400">
                             Active Conflict Zone (5+ events)
                         </span>
                     </div>
@@ -185,7 +185,7 @@ export function ConflictMap() {
                         <span className="relative flex h-3 w-3">
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500" />
                         </span>
-                        <span className="text-zinc-400">Recent Incident</span>
+                        <span className="text-zinc-500 dark:text-zinc-400">Recent Incident</span>
                     </div>
                 </div>
             </CardContent>

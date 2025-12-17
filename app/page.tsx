@@ -17,7 +17,7 @@ export default function Page() {
     const [locationFilter, setLocationFilter] = useState("all")
 
     return (
-        <div className="flex flex-col min-h-screen bg-zinc-950">
+        <div className="flex flex-col min-h-screen bg-zinc-50 dark:bg-zinc-950">
             {/* 1. Sticky Header */}
             <StickyHeader />
 

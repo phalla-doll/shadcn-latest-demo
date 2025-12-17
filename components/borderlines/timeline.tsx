@@ -125,11 +125,11 @@ const categoryConfig: Record<
 function DateSeparator({ date }: { date: string }) {
     return (
         <div className="flex items-center gap-4 py-4">
-            <div className="flex-1 h-px bg-gradient-to-r from-zinc-800 to-transparent" />
-            <span className="text-sm font-medium text-zinc-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
+            <div className="flex-1 h-px bg-gradient-to-r from-zinc-200 dark:from-zinc-800 to-transparent" />
+            <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900 px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800">
                 {date}
             </span>
-            <div className="flex-1 h-px bg-gradient-to-l from-zinc-800 to-transparent" />
+            <div className="flex-1 h-px bg-gradient-to-l from-zinc-200 dark:from-zinc-800 to-transparent" />
         </div>
     )
 }
@@ -142,19 +142,19 @@ function EventCard({ event }: { event: ConflictEvent }) {
     const time = timeMatch ? timeMatch[0] : ""
 
     return (
-        <Card className="bg-zinc-900/50 border-zinc-800 hover:border-zinc-700 transition-all cursor-pointer group">
+        <Card className="bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer group">
             <CardHeader className="pb-2">
                 <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-3">
                         {/* Timeline dot */}
                         <div
-                            className={`mt-1 w-3 h-3 rounded-full ${config.color} ring-4 ring-zinc-900 flex-shrink-0`}
+                            className={`mt-1 w-3 h-3 rounded-full ${config.color} ring-4 ring-white dark:ring-zinc-900 flex-shrink-0`}
                         />
                         <div>
-                            <CardTitle className="text-white text-base group-hover:text-red-400 transition-colors">
+                            <CardTitle className="text-zinc-900 dark:text-white text-base group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors">
                                 {event.title}
                             </CardTitle>
-                            <CardDescription className="text-zinc-500 text-sm">
+                            <CardDescription className="text-zinc-500 dark:text-zinc-500 text-sm">
                                 {time && `${time} • `}
                                 {event.location}
                             </CardDescription>
@@ -164,7 +164,7 @@ function EventCard({ event }: { event: ConflictEvent }) {
                         {event.sources.some((s) => s.url) && (
                             <Badge
                                 variant="outline"
-                                className="border-emerald-700/50 text-emerald-400 text-xs"
+                                            className="border-emerald-300 dark:border-emerald-700/50 text-emerald-600 dark:text-emerald-400 text-xs"
                             >
                                 <svg
                                     className="w-3 h-3 mr-1"
@@ -198,11 +198,11 @@ function EventCard({ event }: { event: ConflictEvent }) {
                 </div>
             </CardHeader>
             <CardContent className="pl-10">
-                <p className="text-zinc-400 text-sm leading-relaxed line-clamp-3">
+                <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed line-clamp-3">
                     {event.description}
                 </p>
                 {event.sources.length > 0 && (
-                    <div className="mt-2 flex items-center gap-2 text-xs text-zinc-500">
+                    <div className="mt-2 flex items-center gap-2 text-xs text-zinc-400 dark:text-zinc-500">
                         <span>Source:</span>
                         {event.sources.map((source) => (
                             <span key={source.title}>
@@ -293,12 +293,12 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         />
                     </svg>
-                    <h3 className="text-lg font-medium text-white">
+                    <h3 className="text-lg font-medium text-zinc-900 dark:text-white">
                         Event Timeline
                     </h3>
                     <Badge
                         variant="secondary"
-                        className="bg-zinc-800 text-zinc-300"
+                        className="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
                     >
                         {filteredEvents.length} events
                     </Badge>
@@ -321,7 +321,7 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
                     <button
                         type="button"
                         onClick={() => setShowAll(true)}
-                        className="text-red-400 hover:text-red-300 text-sm font-medium transition-colors"
+                        className="text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 text-sm font-medium transition-colors"
                     >
                         Show all {filteredEvents.length} events →
                     </button>

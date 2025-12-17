@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator"
 
 export function SiteFooter() {
     return (
-        <footer className="border-t border-zinc-800 bg-zinc-950">
+        <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Left Column - Project Info */}
@@ -26,11 +26,11 @@ export function SiteFooter() {
                                     />
                                 </svg>
                             </div>
-                            <h4 className="text-white font-semibold">
+                            <h4 className="text-zinc-900 dark:text-white font-semibold">
                                 Borderlines Archive
                             </h4>
                         </div>
-                        <p className="text-zinc-500 text-sm leading-relaxed max-w-md">
+                        <p className="text-zinc-600 dark:text-zinc-500 text-sm leading-relaxed max-w-md">
                             An independent documentation project tracking events
                             along the Cambodia-Thailand border. This project is
                             not affiliated with any government or political
@@ -40,7 +40,7 @@ export function SiteFooter() {
                         <div className="flex items-center gap-4 mt-4">
                             <button
                                 type="button"
-                                className="text-zinc-500 hover:text-white transition-colors"
+                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                                 aria-label="Twitter"
                             >
                                 <svg
@@ -54,7 +54,7 @@ export function SiteFooter() {
                             </button>
                             <button
                                 type="button"
-                                className="text-zinc-500 hover:text-white transition-colors"
+                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                                 aria-label="Telegram"
                             >
                                 <svg
@@ -68,7 +68,7 @@ export function SiteFooter() {
                             </button>
                             <button
                                 type="button"
-                                className="text-zinc-500 hover:text-white transition-colors"
+                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                                 aria-label="Facebook"
                             >
                                 <svg
@@ -86,40 +86,40 @@ export function SiteFooter() {
                     {/* Right Column - Links and Copyright */}
                     <div className="md:text-right">
                         <div className="space-y-2">
-                            <p className="text-zinc-400 text-sm">
+                            <p className="text-zinc-500 dark:text-zinc-400 text-sm">
                                 © 2024 Borderlines Archive. All rights reserved.
                             </p>
-                            <p className="text-zinc-500 text-xs">
+                            <p className="text-zinc-400 dark:text-zinc-500 text-xs">
                                 Data sources: Government press releases,
                                 International observers, Local journalists,
                                 Community reports
                             </p>
                         </div>
 
-                        <Separator className="bg-zinc-800 my-4 md:hidden" />
+                        <Separator className="bg-zinc-200 dark:bg-zinc-800 my-4 md:hidden" />
 
                         <div className="flex flex-wrap gap-4 mt-4 md:justify-end text-sm">
                             <button
                                 type="button"
-                                className="text-zinc-500 hover:text-white transition-colors"
+                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                             >
                                 About
                             </button>
                             <button
                                 type="button"
-                                className="text-zinc-500 hover:text-white transition-colors"
+                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                             >
                                 Methodology
                             </button>
                             <button
                                 type="button"
-                                className="text-zinc-500 hover:text-white transition-colors"
+                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                             >
                                 Contact
                             </button>
                             <button
                                 type="button"
-                                className="text-zinc-500 hover:text-white transition-colors"
+                                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                             >
                                 Privacy
                             </button>
