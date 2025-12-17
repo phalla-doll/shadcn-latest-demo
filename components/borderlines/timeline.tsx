@@ -11,6 +11,7 @@ import {
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useMemo, useState } from "react"
+import { EventModal } from "@/components/borderlines/event-modal"
 import { Badge } from "@/components/ui/badge"
 import {
     Card,
@@ -69,7 +70,13 @@ function DateSeparator({ date }: { date: string }) {
     )
 }
 
-function EventCard({ event }: { event: ConflictEvent }) {
+function EventCard({
+    event,
+    onClick,
+}: {
+    event: ConflictEvent
+    onClick: () => void
+}) {
     const config = categoryConfig[event.category]
 
     // Extract time from displayDate if available
@@ -77,7 +84,10 @@ function EventCard({ event }: { event: ConflictEvent }) {
     const time = timeMatch ? timeMatch[0] : ""
 
     return (
-        <Card className="bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer group">
+        <Card
+            className="bg-white dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer group"
+            onClick={onClick}
+        >
             <CardHeader className="pb-2">
                 <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-3">
@@ -142,6 +152,9 @@ interface TimelineProps {
 
 export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
     const [showAll, setShowAll] = useState(false)
+    const [selectedEvent, setSelectedEvent] = useState<ConflictEvent | null>(
+        null,
+    )
 
     // Sort events by date (newest first) and filter
     const filteredEvents = useMemo(() => {
@@ -224,7 +237,11 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
                     <DateSeparator date={date} />
                     <div className="space-y-3">
                         {dateEvents.map((event) => (
-                            <EventCard key={event.id} event={event} />
+                            <EventCard
+                                key={event.id}
+                                event={event}
+                                onClick={() => setSelectedEvent(event)}
+                            />
                         ))}
                     </div>
                 </div>
@@ -241,6 +258,11 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
                     </button>
                 </div>
             )}
+
+            <EventModal
+                event={selectedEvent}
+                onClose={() => setSelectedEvent(null)}
+            />
         </div>
     )
 }
