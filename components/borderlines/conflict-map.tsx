@@ -185,7 +185,9 @@ export function ConflictMap() {
                         <span className="relative flex h-3 w-3">
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500" />
                         </span>
-                        <span className="text-zinc-500 dark:text-zinc-400">Recent Incident</span>
+                        <span className="text-zinc-500 dark:text-zinc-400">
+                            Recent Incident
+                        </span>
                     </div>
                 </div>
             </CardContent>

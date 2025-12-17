@@ -31,8 +31,10 @@ interface StatCardProps {
 
 function StatCard({ label, value, icon, variant = "default" }: StatCardProps) {
     const variantStyles = {
-        default: "bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700",
-        warning: "bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/50",
+        default:
+            "bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700",
+        warning:
+            "bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/50",
         danger: "bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800/50",
     }
 

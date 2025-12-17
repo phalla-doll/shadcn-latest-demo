@@ -164,7 +164,7 @@ function EventCard({ event }: { event: ConflictEvent }) {
                         {event.sources.some((s) => s.url) && (
                             <Badge
                                 variant="outline"
-                                            className="border-emerald-300 dark:border-emerald-700/50 text-emerald-600 dark:text-emerald-400 text-xs"
+                                className="border-emerald-300 dark:border-emerald-700/50 text-emerald-600 dark:text-emerald-400 text-xs"
                             >
                                 <svg
                                     className="w-3 h-3 mr-1"

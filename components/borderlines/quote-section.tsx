@@ -45,7 +45,10 @@ export function QuoteSection() {
                     <p className="text-xl md:text-2xl lg:text-3xl font-medium text-zinc-900 dark:text-white leading-relaxed">
                         United for Cambodia. Standing together in times of
                         crisis,
-                        <span className="text-red-500 dark:text-red-400"> documenting truth</span>
+                        <span className="text-red-500 dark:text-red-400">
+                            {" "}
+                            documenting truth
+                        </span>
                         ,
                         <span className="text-amber-500 dark:text-amber-400">
                             {" "}

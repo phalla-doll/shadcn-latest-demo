@@ -1,8 +1,8 @@
 "use client"
 
-import { useMemo } from "react"
 import { Tick02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useMemo } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -54,13 +54,21 @@ export function FilterBar({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white dark:bg-zinc-900/50 rounded-xl border border-zinc-200 dark:border-zinc-800">
             <div className="flex items-center gap-3 flex-wrap">
                 {/* Location Filter */}
-                <Select value={locationFilter} onValueChange={(value) => onLocationChange(value ?? "all")}>
+                <Select
+                    value={locationFilter}
+                    onValueChange={(value) => onLocationChange(value ?? "all")}
+                >
                     <SelectTrigger className="w-52 bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white">
                         <SelectValue>
-                            {locationFilter === "all" ? "All Locations" : locationFilter}
+                            {locationFilter === "all"
+                                ? "All Locations"
+                                : locationFilter}
                         </SelectValue>
                     </SelectTrigger>
-                    <SelectContent className="bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 max-h-64" alignItemWithTrigger={false}>
+                    <SelectContent
+                        className="bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 max-h-64"
+                        alignItemWithTrigger={false}
+                    >
                         <SelectItem value="all">All Locations</SelectItem>
                         {locations.map((location) => (
                             <SelectItem
@@ -78,7 +86,11 @@ export function FilterBar({
                     variant="secondary"
                     className="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700"
                 >
-                    <HugeiconsIcon icon={Tick02Icon} className="size-3.5 mr-1" strokeWidth={2.5} />
+                    <HugeiconsIcon
+                        icon={Tick02Icon}
+                        className="size-3.5 mr-1"
+                        strokeWidth={2.5}
+                    />
                     {filteredCount} verified events
                 </Badge>
             </div>
