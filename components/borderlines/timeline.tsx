@@ -223,7 +223,7 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
                                 Event Timeline
                             </h3>
                             <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                                Chronological record of documented incidents
+                                Chronological record of documented incidents from the Ministry of Defence
                             </p>
                         </div>
                     </div>
