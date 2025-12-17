@@ -4,7 +4,6 @@ import { MapsIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import type { Map as LeafletMap, Marker } from "leaflet"
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Badge } from "@/components/ui/badge"
 import {
     Card,
     CardContent,
@@ -171,8 +170,6 @@ export function ConflictMap() {
             }
         }
     }, [conflictLocations, isMapLoaded])
-
-    const activeZones = conflictLocations.length
 
     return (
         <>
