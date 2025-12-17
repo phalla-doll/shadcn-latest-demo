@@ -10,7 +10,6 @@ import {
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
-import { useMemo } from "react"
 import {
     Card,
     CardContent,
@@ -19,7 +18,6 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { EVENTS } from "@/constants"
 
 interface StatCardProps {
     label: string
@@ -113,40 +111,6 @@ const provinceData: ProvinceData[] = [
 ]
 
 export function DisplacementSummary() {
-    // Calculate stats from real events
-    const stats = useMemo(() => {
-        const militaryEvents = EVENTS.filter(
-            (e) => e.category === "Military",
-        ).length
-        const civilianEvents = EVENTS.filter(
-            (e) => e.category === "Civilian",
-        ).length
-
-        // Get unique locations
-        const locations = new Set(
-            EVENTS.map((e) => e.location.split(",")[0].trim()),
-        )
-
-        // Get date range
-        const dates = EVENTS.map((e) => new Date(e.date)).sort(
-            (a, b) => a.getTime() - b.getTime(),
-        )
-        const firstDate = dates[0]
-        const lastDate = dates[dates.length - 1]
-        const daySpan =
-            Math.ceil(
-                (lastDate.getTime() - firstDate.getTime()) /
-                    (1000 * 60 * 60 * 24),
-            ) + 1
-
-        return {
-            totalEvents: EVENTS.length,
-            militaryEvents,
-            civilianEvents,
-            locations: locations.size,
-            daySpan,
-        }
-    }, [])
 
     const totalFamilies = provinceData.reduce(
         (acc, p) => acc + (p.families || 0),
