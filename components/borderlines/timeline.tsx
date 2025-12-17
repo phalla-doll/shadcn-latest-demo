@@ -60,11 +60,11 @@ const categoryConfig: Record<
 function DateSeparator({ date }: { date: string }) {
     return (
         <div className="flex items-center gap-4 py-4">
-            <div className="flex-1 h-px bg-gradient-to-r from-zinc-200 dark:from-zinc-800 to-transparent" />
+            <div className="flex-1 h-px bg-linear-to-r from-zinc-200 dark:from-zinc-800 to-transparent" />
             <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900 px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800">
                 {date}
             </span>
-            <div className="flex-1 h-px bg-gradient-to-l from-zinc-200 dark:from-zinc-800 to-transparent" />
+            <div className="flex-1 h-px bg-linear-to-l from-zinc-200 dark:from-zinc-800 to-transparent" />
         </div>
     )
 }
@@ -83,7 +83,7 @@ function EventCard({ event }: { event: ConflictEvent }) {
                     <div className="flex items-start gap-3">
                         {/* Timeline dot */}
                         <div
-                            className={`mt-1 w-3 h-3 rounded-full ${config.color} ring-4 ring-white dark:ring-zinc-900 flex-shrink-0`}
+                            className={`mt-1 w-3 h-3 rounded-full ${config.color} ring-4 ring-white dark:ring-zinc-900 shrink-0`}
                         />
                         <div>
                             <CardTitle className="text-zinc-900 dark:text-white text-base group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors">
@@ -95,7 +95,7 @@ function EventCard({ event }: { event: ConflictEvent }) {
                             </CardDescription>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-2 shrink-0">
                         {event.sources.some((s) => s.url) && (
                             <Badge
                                 variant="outline"

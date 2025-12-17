@@ -302,7 +302,9 @@ export function DisplacementSummary() {
                                             {province.people.toLocaleString()}
                                         </td>
                                         <td className="py-3 px-4 text-right">
-                                            <span className={`tabular-nums ${province.deaths ? "text-red-500 dark:text-red-300" : "text-zinc-600 dark:text-zinc-300"}`}>
+                                            <span
+                                                className={`tabular-nums ${province.deaths ? "text-red-500 dark:text-red-300" : "text-zinc-600 dark:text-zinc-300"}`}
+                                            >
                                                 {province.deaths.toLocaleString()}
                                             </span>
                                         </td>

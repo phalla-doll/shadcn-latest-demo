@@ -64,7 +64,8 @@ const provinceData: ProvinceData[] = [
 const chartData = provinceData
     .filter((p) => !p.pending)
     .map((p) => ({
-        name: p.province.length > 12 ? p.province.slice(0, 12) + "…" : p.province,
+        name:
+            p.province.length > 12 ? p.province.slice(0, 12) + "…" : p.province,
         fullName: p.province,
         families: p.families || 0,
         people: p.people,
@@ -143,7 +144,9 @@ export function ProvinceBarChart() {
                             tickLine={{ stroke: "#52525b" }}
                             axisLine={{ stroke: "#52525b" }}
                             tickFormatter={(value) =>
-                                value >= 1000 ? `${(value / 1000).toFixed(0)}k` : value
+                                value >= 1000
+                                    ? `${(value / 1000).toFixed(0)}k`
+                                    : value
                             }
                         />
                         <Tooltip
@@ -155,7 +158,9 @@ export function ProvinceBarChart() {
                                 paddingTop: "20px",
                             }}
                             formatter={(value) => (
-                                <span className="text-zinc-400 text-sm">{value}</span>
+                                <span className="text-zinc-400 text-sm">
+                                    {value}
+                                </span>
                             )}
                         />
                         <Bar
@@ -176,4 +181,3 @@ export function ProvinceBarChart() {
         </div>
     )
 }
-
