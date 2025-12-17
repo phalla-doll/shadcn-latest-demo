@@ -64,13 +64,10 @@ export function StickyHeader() {
                     rel="noopener noreferrer"
                     className={cn(
                         buttonVariants({ variant: "outline" }),
-                        "hidden md:flex items-center border-blue-300 dark:border-blue-700/50 text-blue-700 dark:text-blue-200 bg-blue-50 dark:bg-blue-950/30 hover:bg-blue-100 dark:hover:bg-blue-900/40"
+                        "hidden md:flex items-center border-blue-300 dark:border-blue-700/50 text-blue-700 dark:text-blue-200 bg-blue-50 dark:bg-blue-950/30 hover:bg-blue-100 dark:hover:bg-blue-900/40",
                     )}
                 >
-                    <HugeiconsIcon
-                        icon={Location01Icon}
-                        className="size-4"
-                    />
+                    <HugeiconsIcon icon={Location01Icon} className="size-4" />
                     Phnom Penh Donation Map
                 </Link>
             </div>

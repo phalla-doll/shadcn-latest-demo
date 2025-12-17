@@ -6,8 +6,8 @@ import {
     Sun03Icon,
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { useTheme } from "next-themes"
 import Link from "next/link"
+import { useTheme } from "next-themes"
 import { Separator } from "@/components/ui/separator"
 
 export function SiteFooter() {
