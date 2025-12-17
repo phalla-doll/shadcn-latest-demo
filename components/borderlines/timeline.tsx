@@ -209,22 +209,37 @@ export function Timeline({ locationFilter = "all", limit }: TimelineProps) {
 
     return (
         <div className="space-y-2">
-            <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                    <HugeiconsIcon
-                        icon={Calendar01Icon}
-                        className="w-5 h-5 text-zinc-400"
-                    />
-                    <h3 className="text-lg font-medium text-zinc-900 dark:text-white">
-                        Event Timeline
-                    </h3>
+            <div className="relative mb-6 pb-4 pt-4 border-b border-zinc-200 dark:border-zinc-800">
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg bg-linear-to-br from-red-500/10 to-amber-500/10 dark:from-red-500/20 dark:to-amber-500/20 border border-red-200/50 dark:border-red-800/30">
+                            <HugeiconsIcon
+                                icon={Calendar01Icon}
+                                className="w-5 h-5 text-red-500 dark:text-red-400"
+                            />
+                        </div>
+                        <div className="space-y-1">
+                            <h3 className="text-base font-semibold text-zinc-900 dark:text-white tracking-tight">
+                                Event Timeline
+                            </h3>
+                            <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                                Chronological record of documented incidents
+                            </p>
+                        </div>
+                    </div>
                     <Badge
                         variant="secondary"
-                        className="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
+                        className="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700"
                     >
-                        {filteredEvents.length} events
+                        <HugeiconsIcon
+                            icon={Tick02Icon}
+                            className="size-3.5 mr-1"
+                            strokeWidth={2.5}
+                        />
+                        {filteredEvents.length} verified events
                     </Badge>
                 </div>
+                <div className="absolute bottom-0 left-0 w-16 h-px bg-linear-to-r from-red-500 to-transparent" />
             </div>
 
             {Object.entries(groupedEvents).map(([date, dateEvents]) => (
