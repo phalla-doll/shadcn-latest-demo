@@ -30,7 +30,7 @@ export function StickyHeader() {
     }, [])
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-red-200/30 dark:border-red-900/30 bg-white/95 dark:bg-zinc-950/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-zinc-950/80">
+        <header className="sticky top-0 z-50 w-full border-b border-red-200/30 dark:border-red-900/30 bg-white/95 dark:bg-zinc-950/95 backdrop-blur supports-backdrop-filter:bg-white/80 dark:supports-backdrop-filter:bg-zinc-950/80">
             <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
                 {/* Left Content */}
                 <div className="flex-1">
