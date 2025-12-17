@@ -38,12 +38,6 @@ export function StickyHeader() {
                         >
                             {dateRange}
                         </Badge>
-                        <Badge
-                            variant="secondary"
-                            className="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
-                        >
-                            {EVENTS.length} events documented
-                        </Badge>
                     </div>
 
                     {/* Desktop CTA */}

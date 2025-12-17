@@ -193,7 +193,7 @@ export function DisplacementSummary() {
             <CardContent className="pt-6 space-y-6">
                 {/* Displacement Impact Grid */}
                 <div>
-                    <h4 className="text-zinc-300 text-sm font-medium mb-3 flex items-center gap-2">
+                    <h4 className="text-zinc-700 dark:text-zinc-300 text-sm font-medium mb-3 flex items-center gap-2">
                         <span className="w-1 h-4 bg-red-500 rounded-full" />
                         Displacement Impact
                     </h4>
@@ -303,7 +303,7 @@ export function DisplacementSummary() {
 
                 {/* Province Breakdown Table */}
                 <div>
-                    <h4 className="text-zinc-300 text-sm font-medium mb-3 flex items-center gap-2">
+                    <h4 className="text-zinc-700 dark:text-zinc-300 text-sm font-medium mb-3 flex items-center gap-2">
                         <span className="w-1 h-4 bg-emerald-500 rounded-full" />
                         Province Breakdown
                     </h4>
