@@ -18,7 +18,6 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { ProvinceBarChart } from "./province-bar-chart"
 
 interface StatCardProps {
     label: string
